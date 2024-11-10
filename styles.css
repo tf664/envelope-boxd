@@ -1,12 +1,37 @@
-body {
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-header {
-
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #333;
+    color: aliceblue;
 }
 
-test {
-    font-size: 5px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.icon {
+    font-size: 1.5em;
+    cursor: pointer; /* Corrected from "cursors: pointer;" */
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+.menu {
+    display: flex;
+    gap: 1em;
+}
+
+.menu-item {
+    cursor: pointer;
+}
+
+main {
+    padding: 1em;
 }
