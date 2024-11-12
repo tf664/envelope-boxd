@@ -35,3 +35,27 @@
 main {
     padding: 1em;
 }
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    list-style: none; /* since the movies are getting stored in the unordered list element <ul>, one need to remove the list-style to remove bullet-points */
+    padding: 0;
+}
+
+.movie {
+    text-align: center;
+    width: 150px;
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.movie-title {
+    margin-top: 0.5em;
+    font-size: 1em;
+    color: #333;
+}
