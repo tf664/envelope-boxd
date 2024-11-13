@@ -14,11 +14,6 @@
     color: aliceblue;
 }
 
-.icon {
-    font-size: 1.5em;
-    cursor: pointer; /* Corrected from "cursors: pointer;" */
-}
-
 .logo {
     font-size: 1.5em;
 }
@@ -33,29 +28,87 @@
 }
 
 main {
-    padding: 1em;
-}
-.movies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    list-style: none; /* since the movies are getting stored in the unordered list element <ul>, one need to remove the list-style to remove bullet-points */
-    padding: 0;
+    padding: 1em;
 }
 
+
+
+.movie-container {
+    display: flex; /* Align movie items horizontally */
+    overflow-x: auto; /* Allow horizontal scrolling when content overflows */
+    gap: 16px; /* Spacing between the movie posters */
+    padding: 16px 0; /* Vertical padding */
+    white-space: nowrap; /* Prevent items from wrapping */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Hide the scrollbar, but keep scrolling functionality */
+.movie-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Webkit browsers */
+}
+
+.movie-container {
+    -ms-overflow-style: none;  /* For IE and Edge */
+    scrollbar-width: none; /* For Firefox */
+}
+
+/* Styling for each movie poster */
 .movie {
+    width: 150px; /* Fixed width for each movie poster */
     text-align: center;
-    width: 150px;
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-bottom: 10px; /* Add space between the poster and title */
 }
 
+/* Styling for the poster image */
 .movie-poster {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Make poster fill the container */
+    height: 220px; /* Fixed height for uniformity */
+    object-fit: cover; /* Crop to fit */
     border-radius: 8px;
 }
 
+/* Movie title below each poster */
 .movie-title {
-    margin-top: 0.5em;
+    margin-top: 8px;
     font-size: 1em;
     color: #333;
+    text-align: center;
+}
+
+
+
+
+/* Container for the search bar and icon */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease;
+}
+
+.search-input {
+    width: 0;
+    opacity: 0;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+.icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.search-active .search-input {
+    width: 150px;
+    opacity: 1;
+    margin-right: 5px;
+}
+
+.search-active .icon {
+    transform: translateX(-20px);
 }
