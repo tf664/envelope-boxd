@@ -1,3 +1,4 @@
+include ('recommendations.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,15 @@
 
 
     <main>
-        <p>This is my first web page!</p>
+        This is my first web page!
+        <?php echo 'Test'; ?>
+        <br>
+        <h1>Star Wars Movie Posters</h1>
+        <div class="movies">
+            <?php
+            getStarWars(); ?>
+        </div> 
+        <h3> Test</h3>
     </main>
   <!--  <script src="script.js"></script> -->
 </body>
