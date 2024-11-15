@@ -1,6 +1,7 @@
-include ('recommendations.php');
 <!DOCTYPE html>
 <html lang="en">
+<?php include 'loginSystem/auth.php'; ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,35 +9,32 @@ include ('recommendations.php');
     <link rel="stylesheet" href="styles.css">
 </head>
 
-
 <body>
     <!-- Top Banner -->
     <header class="banner">
         <div class="logo">EnvelopeBaskd</div>
         <nav class="menu">
-            <div class="menu-item">Watchlist</div>
-            <div class="menu-item">Reviews</div>
-            <div class="menu-item">About</div>
-            <div class="menu-item">Account</div>
+            <a href="pagesHTML/watchlist.html" class="menu-item">Watchlist</a>
+            <a href="pagesHTML/reviews.html" class="menu-item">Reviews</a>
+            <a href="pagesHTML/about.html" class="menu-item">About</a>
+            <a href="pagesHTML/logout.html" class="menu-item">Logout</a>
         </nav>
         <div class="icons">
-            <div class="icon">🔍</div>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search for a movie...">
+                <div class="icon" id="search-icon">🔍</div>
+            </div>
         </div>
-        
     </header>
-
-
     <main>
-        This is my first web page!
-        <?php echo 'Test'; ?>
-        <br>
-        <h1>Star Wars Movie Posters</h1>
-        <div class="movies">
-            <?php
-            getStarWars(); ?>
-        </div> 
-        <h3> Test</h3>
+        <h1>Searched Movies:</h1>
+        <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly -->
+        </div>
     </main>
-  <!--  <script src="script.js"></script> -->
+
+    <!-- Include the custom JavaScript file for fetching and displaying movies -->
+    <script src="api/getMovies.js"></script>
+    <script src="api/searchbar.js"></script> <!-- For toggling the search bar -->
 </body>
+
 </html>
