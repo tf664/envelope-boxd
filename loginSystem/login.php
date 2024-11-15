@@ -43,7 +43,6 @@ if (isset($_POST['login'])) {
     } else {
         $error = "Invalid login credentials."; // General error message
     }
-
     // Close the connection
     $stmt->close();
     $conn->close();
