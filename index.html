@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php include 'loginSystem/auth.php'; ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envelope Baskd</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Top Banner -->
     <header class="banner">
@@ -14,7 +17,6 @@
             <a href="pagesHTML/watchlist.html" class="menu-item">Watchlist</a>
             <a href="pagesHTML/reviews.html" class="menu-item">Reviews</a>
             <a href="pagesHTML/about.html" class="menu-item">About</a>
-            <a href="pagesHTML/account.html" class="menu-item">Account</a>
             <a href="pagesHTML/logout.html" class="menu-item">Logout</a>
         </nav>
         <div class="icons">
@@ -34,4 +36,5 @@
     <script src="api/getMovies.js"></script>
     <script src="api/searchbar.js"></script> <!-- For toggling the search bar -->
 </body>
+
 </html>
