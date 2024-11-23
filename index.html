@@ -20,19 +20,20 @@
             <a href="pagesHTML/logout.html" class="menu-item">Logout</a>
         </nav>
         <div class="icons">
+            <!-- Updated search bar without form tag -->
             <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search for a movie...">
+                <input type="text" id="search-input" class="search-input" placeholder="Search for a movie..." name="query">
                 <div class="icon" id="search-icon">🔍</div>
             </div>
         </div>
     </header>
+
     <main>
         <h1>Searched Movies:</h1>
-        <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly -->
-        </div>
+        <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly --> </div>
     </main>
 
-    <!-- Include the custom JavaScript file for fetching and displaying movies -->
+    <!-- Include the custom JavaScript files -->
     <script src="api/getMovies.js"></script>
     <script src="api/searchbar.js"></script> <!-- For toggling the search bar -->
 </body>

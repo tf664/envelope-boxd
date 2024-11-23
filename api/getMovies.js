@@ -4,18 +4,26 @@ async function fetchMovies(query) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '69accaae64msh61b2e842f7a6607p1fa8dbjsnf2e6dbf2350d', // Hide this in production
+            'x-rapidapi-key': '099c93e59bmsh5b63b7ecbb52195p1ea84djsn00ea468a0e19', // Hide this in production
             'x-rapidapi-host': 'imdb8.p.rapidapi.com'
         }
     };
 
     try {
         const response = await fetch(url, options);
+
+        if (response.status === 429) { // API rate limit error code
+            console.error("API Rate limit exceeded");
+            displayMovies([]); // Clear the movie container 
+            return; 
+        }
+
         const result = await response.json();
 
         if (result && result.d) {
-            // Return the list of movies
-            return result.d; // Assuming 'd' contains the array of movies
+            // filters for only movies and shows
+            const filteredResults = result.d.filter(item => item.qid === 'movie' || item.qid === 'tvSeries');
+            return filteredResults;
         } else {
             console.error("Unexpected API response: " + result);
             return [];
@@ -30,11 +38,16 @@ function displayMovies(movies) {
     const movieContainer = document.getElementById('movie-list');
     movieContainer.innerHTML = ''; // Clear previous content
 
+    if (movies.length === 0) {
+        movieContainer.innerHTML = "<p>No movies or shows found.</p>"; // Show message if no results
+        return;
+    } 
+
     movies.forEach(movie => {
         const movieItem = document.createElement('div'); // Use div instead of li
         movieItem.classList.add('movie'); // Apply styling
 
-        const imageUrl = movie.i?.imageUrl || 'placeholder.png'; 
+        const imageUrl = movie.i?.imageUrl || 'placeholder.png';
         const title = movie.l || 'Title not available';
 
         movieItem.innerHTML = `
@@ -49,18 +62,18 @@ function displayMovies(movies) {
 async function init() {
     const searchInput = document.getElementById('search-input');
 
-    // Initial load with a default query
-    let movies = await fetchMovies(''); // Default initial search
-    if (movies) displayMovies(movies);
+    // Event listener for Enter key to trigger the search
+    searchInput.addEventListener('keydown', async (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent form submission
 
-    // Set up search input listener to fetch and display movies based on user input
-    searchInput.addEventListener('input', async () => {
-        const query = searchInput.value.trim(); // Get the user's input
-        if (query) { // Only search if there's an input
-            movies = await fetchMovies(query); // Fetch movies based on query
-            if (movies) displayMovies(movies); // Display the results
-        } else {
-            movieList.innerHTML = ''; // Clear results if input is empty
+            const query = searchInput.value.trim(); // Get the user's input
+            if (query) {
+                const movies = await fetchMovies(query); // Fetch movies based on query
+                displayMovies(movies); // Display the results
+            } else {
+                displayMovies([]); // Clear results if input is empty
+            }
         }
     });
 }
