@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Envelope Baskd</title>
+    <title>Movie List</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -30,12 +30,15 @@
 
     <main>
         <h1>Searched Movies:</h1>
+        <button id="scroll-left" class="scroll-button">⬅️</button>
         <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly --> </div>
+        <button id="scroll-right" class="scroll-button">➡️</button>
     </main>
 
     <!-- Include the custom JavaScript files -->
     <script src="api/getMovies.js"></script>
     <script src="api/searchbar.js"></script> <!-- For toggling the search bar -->
+    <script src="api/scroll.js"></script> <!-- For enabling button-based scrolling -->
 </body>
 
 </html>
