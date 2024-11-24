@@ -1,8 +1,8 @@
 <?php
-$dsn = 'msql:host=localhost;dbname=userdb';
+$dsn = 'mysql:host=localhost;dbname=userdb';
 $username = 'root';
 $password = '';
 
-$con = new PDO($dsn, $username, $password"");
+$con = new PDO($dsn, $username, $password);
 
 ?>

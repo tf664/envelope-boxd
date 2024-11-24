@@ -1,104 +1,168 @@
-/* Allgemeine Einstellungen */
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
-    font-family: "Press Start 2P", cursive; /* Pixelige Schriftart */
-    background: linear-gradient(135deg, #ff0080, #ff8c00); /* Neon-Verlauf */
+    font-family: 'Press Start 2P', monospace;
+    /* Pixel font */
+    background-color: #f0e6b8;
+    /* Vintage background */
     display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
     justify-content: center;
+    /* Center elements vertically */
     align-items: center;
-    color: #fff;
-}
-
-/* Formular-Styling */
-form {
-    width: 400px;
-    padding: 30px;
-    background: #000; /* Schwarzer Hintergrund für Kontrast */
-    border: 5px solid #ff8c00; /* Neon-Orange Rahmen */
-    border-radius: 15px;
-    box-shadow: 0 0 15px #ff8c00, 0 0 30px #ff0080; /* Leuchtende Effekte */
+    /* Center elements horizontally */
+    color: #333;
     text-align: center;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    /* Retro background */
+    background-repeat: repeat;
+    /* Repeats the pattern for tiling */
+    background-size: auto;
+    /* Ensures the pattern remains in its natural size */
 }
 
-/* Überschrift */
-h1 {
-    font-size: 1.5rem;
+/* Form Container Styling */
+.container {
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+    background: #fff;
+    /* White form background for contrast */
+    border: 4px solid #d4b183;
+    /* Golden border to resemble vintage cinema */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    /* Soft shadow for a lifted look */
     margin-bottom: 20px;
-    text-shadow: 0 0 5px #ff0080, 0 0 10px #ff8c00; /* Leuchtende Überschrift */
+    /* Space between form and login redirect */
+    text-align: center;
+    /* Center text inside the form */
 }
 
-/* Eingabefelder */
+/* Title Styling */
+h1 {
+    font-size: 1.8rem;
+    /* Adjusted size for better fit */
+    margin-bottom: 20px;
+    /* Adds spacing below the title */
+    color: #8a4b3b;
+    /* Deep brown for the title color */
+    font-family: 'Press Start 2P', monospace;
+    /* Consistent font */
+    font-weight: normal;
+    /* Remove bold */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+    /* Subtle vintage shadow */
+}
+
+/* Input Fields */
 input {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
+    /* Balanced padding */
     margin: 10px 0;
-    border: 3px solid #ff8c00; /* Neon-Orange Rahmen */
+    border: 2px solid #d4b183;
+    /* Golden border for input fields */
     border-radius: 5px;
-    background: #222; /* Dunkler Hintergrund */
-    color: #fff; /* Weiße Schrift */
+    background: #f5f0e1;
+    /* Light beige background for inputs */
+    color: #333;
     font-size: 1rem;
-    font-family: "Press Start 2P", cursive; /* Pixelige Schrift */
-    text-align: center; /* Text zentrieren */
+    /* Balanced font size */
+    text-align: center;
     outline: none;
-    transition: all 0.3s ease;
+    font-family: 'Press Start 2P', monospace;
+    /* Classic pixel font */
+    letter-spacing: 1px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    /* Smooth transitions */
 }
 
 input::placeholder {
-    color: #aaa; /* Blassgrau */
-    font-size: 0.9rem;
+    color: #aaa;
+    /* Light gray for placeholders */
 }
 
 input:focus {
-    border-color: #ff0080; /* Neon-Pink beim Fokussieren */
-    background: #000; /* Tieferes Schwarz */
+    border-color: #f5a623;
+    /* Subtle orange focus effect */
+    background: #fff;
+    /* Bright white background when focused */
 }
 
-/* Button-Styling */
-button {
-    width: 100%;
-    padding: 15px;
+/* Submit Button Styling */
+input[type="submit"] {
+    width: 80%;
+    padding: 10px;
+    /* Smaller padding for the button */
     margin-top: 20px;
-    border: none;
+    border: 3px solid #8a4b3b;
+    /* Golden button border */
     border-radius: 5px;
-    background: #ff0080; /* Neon-Pink Hintergrund */
-    color: #fff; /* Weiße Schrift */
+    background: #f5f0e1;
+    /* Light beige background */
+    color: #333;
     font-size: 1rem;
-    font-family: "Press Start 2P", cursive; /* Pixelige Schrift */
+    /* Smaller font size */
+    font-family: 'Press Start 2P', monospace;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 5px #ff8c00, 0 0 15px #ff0080; /* Leuchtender Button */
+    transition: background 0.3s ease, border 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for the button */
 }
 
-button:hover {
-    background: #ff8c00; /* Wechsel zu Neon-Orange */
-    box-shadow: 0 0 10px #ff0080, 0 0 20px #ff8c00; /* Leuchtende Effekte verstärken */
+input[type="submit"]:hover {
+    background: #d4b183;
+    /* Golden button hover */
+    border-color: #f5a623;
+    /* Slightly brighter golden hover */
 }
 
-button:focus {
+input[type="submit"]:focus {
     outline: none;
 }
 
-/* Anpassung für kleinere Bildschirme */
-@media (max-width: 768px) {
-    form {
-        width: 90%;
-    }
+/* Error Message Styling */
+.error-message {
+    margin-top: 15px;
+    color: red;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    text-align: center;
+}
 
-    h1 {
-        font-size: 1.2rem;
-    }
 
-    input {
-        font-size: 0.8rem;
-    }
+.redirect {
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+    color: #8a4b3b;
+}
 
-    button {
-        font-size: 0.8rem;
-    }
+.redirect p {
+    margin-bottom: 10px;
+}
+
+.redirect-link {
+    text-decoration: none;
+    color: #f5a623;
+    font-weight: bold;
+    border: 2px solid #f5a623;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.redirect-link:hover {
+    background: #f5a623;
+    color: #fff;
 }

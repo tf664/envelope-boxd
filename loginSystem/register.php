@@ -1,60 +1,80 @@
 <?php
+$error_message = "";
+
 require("connection.php");
 
 if (isset($_POST["submit"])) {
-    var_dump($_POST);
-
     $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username =:username");
+    $stmt = $con->prepare("SELECT * FROM users WHERE username = :username");
     $stmt->bindParam(":username", $username);
     $stmt->execute();
 
     $userAlreadyExists = $stmt->fetchColumn();
 
-    if (!$userAlreadyExists) {
-        // Register
-        registerUser($username, $password);
+    if (strlen($username) < 1 || strlen($password) < 1) {
+        $error_message = "Username and password must be at least 1 character long";
+    } else if ($password != $confirm_password) {
+        $error_message = "Passwords do not match";
+    } else if ($userAlreadyExists) {
+        $error_message = "User already exists";
     } else {
-        echo "User already exists";
+        $error_message = "";
+        // Register
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        registerUser($username, $hashed_password);
     }
 }
 
 function registerUser($username, $password)
 {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+    global $con;
+    $stmt = $con->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":password", $password);
     $stmt->execute();
-    // Redirect to main page
-    $_SESSION['user_id'] = $conn->lastInsertId(); // Setzt die Session mit der User-ID
-    header('Location: index.php'); // Leitet den Benutzer weiter
+
+    session_start();
+    $_SESSION["username"] = $username;
+    header("Location: ../index.php");
     exit();
 }
-
 ?>
-
 
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="loginSystemStyle.css">
     <title>Register</title>
 </head>
 
 <body>
-    <form action="register.php" method="post">
-        <div class="Register">
+    <!-- Registration form -->
+    <div class="container">
+        <form action="register.php" method="post">
             <h1>Register</h1>
             <div class="inputs_container">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <input type="password" name="confirm_password" placeholder="Confirm Password">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
             </div>
             <input type="submit" name="submit" value="Register">
-        </div>
+
+            <!-- Error message -->
+            <?php if (isset($_POST["submit"]) && !empty($error_message)) {
+                echo "<div class='error-message'>$error_message</div>";
+            } ?>
+        </form>
+    </div>
+    <!-- Login redirect -->
+    <div class="redirect">
+        <p>Already have an account?</p>
+        <a href="login.php" class="redirect-link">Press here to login</a>
+    </div>
+</body>
 
 </html>

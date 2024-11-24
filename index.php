@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <?php
-    include 'loginSystem/sessionHandler.php'; // Verbindet die Authentifizierung
-    ?>
+
+<?php
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -14,22 +14,7 @@
 
 <body>
     <!-- Top Banner -->
-    <header class="banner">
-        <div class="logo">EnvelopeBaskd</div>
-        <nav class="menu">
-            <a href="pagesHTML/watchlist.html" class="menu-item">Watchlist</a>
-            <a href="pagesHTML/reviews.html" class="menu-item">Reviews</a>
-            <a href="pagesHTML/about.html" class="menu-item">About</a>
-            <a href="pagesHTML/logout.html" class="menu-item">Logout</a>
-        </nav>
-        <div class="icons">
-            <!-- Updated search bar without form tag -->
-            <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search for a movie..." name="query">
-                <div class="icon" id="search-icon">🔍</div>
-            </div>
-        </div>
-    </header>
+    <?php include 'header.php'; ?>
 
     <main>
         <h1>Searched Movies:</h1>
@@ -38,10 +23,11 @@
         <button id="scroll-right" class="scroll-button">➡️</button>
     </main>
 
-    <!-- Include the custom JavaScript files -->
+    <!-- Debugging -->
+
     <script src="api/getMovies.js"></script>
-    <script src="api/searchbar.js"></script> <!-- For toggling the search bar -->
-    <script src="api/scroll.js"></script> <!-- For enabling button-based scrolling -->
+    <script src="api/searchbar.js"></script> <!-- Toggling the search bar -->
+    <script src="api/scroll.js"></script> <!-- Scroll buttons -->
 </body>
 
 </html>

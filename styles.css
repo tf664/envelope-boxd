@@ -28,7 +28,8 @@
 
 .menu-item {
     cursor: pointer;
-    padding: 12px; /* Increased padding for better clickability */
+    padding: 12px;
+    /* Increased padding for better clickability */
     font-size: 1.2em;
     color: aliceblue;
     transition: transform 0.3s ease, border-color 0.3s ease;
@@ -36,40 +37,57 @@
 }
 
 .menu-item:hover {
-    transform: scale(1.1); /* Slight zoom effect */
-    border-color: #fff; /* White underline on hover */
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    border-color: #fff;
+    /* White underline on hover */
 }
 
 .movie-container {
     display: flex;
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    height: 300px; /* Set a fixed height */
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
-    scroll-behavior: smooth; /* Smooth scrolling */
-    align-items: flex-end; /* Align items to the bottom */
+    overflow-x: scroll;
+    /* Enable horizontal scrolling */
+    height: 300px;
+    /* Set a fixed height */
+    scrollbar-width: none;
+    /* For Firefox */
+    -ms-overflow-style: none;
+    /* For Internet Explorer and Edge */
+    scroll-behavior: smooth;
+    /* Smooth scrolling */
+    align-items: flex-end;
+    /* Align items to the bottom */
 }
 
 .movie-container::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
+    display: none;
+    /* For Chrome, Safari, and Opera */
 }
 
 .movie-item {
-    flex: 0 0 auto; /* Prevent items from shrinking */
+    flex: 0 0 auto;
+    /* Prevent items from shrinking */
     margin: 10px;
     text-align: center;
-    width: 150px; /* Set a fixed width for movie items */
-    height: 250px; /* Set a fixed height for movie items */
+    width: 150px;
+    /* Set a fixed width for movie items */
+    height: 250px;
+    /* Set a fixed height for movie items */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Align content to the bottom */
+    justify-content: flex-end;
+    /* Align content to the bottom */
 }
 
 .movie-item img {
-    width: 100%; /* Make the image take the full width of the movie item */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 200px; /* Set a maximum height for the images */
-    object-fit: contain; /* Ensure the image fits within the container without distortion */
+    width: 100%;
+    /* Make the image take the full width of the movie item */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 200px;
+    /* Set a maximum height for the images */
+    object-fit: contain;
+    /* Ensure the image fits within the container without distortion */
 }
 
 .movie-title {
@@ -111,33 +129,27 @@
     display: flex;
     align-items: center;
     transition: width 0.3s ease;
-    /* Transition for width of the container */
 }
 
 .search-input {
+    /* Initially hidden */
     width: 0;
-    /* Initially hidden */
     opacity: 0;
-    /* Initially hidden */
     padding: 5px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: width 0.4s ease, opacity 0.4s ease;
-    /* Transition for width and opacity */
 }
 
 .icon {
     font-size: 1.5em;
     cursor: pointer;
     transition: transform 0.4s ease;
-    /* Smooth transition for icon movement */
 }
 
 .search-active .search-input {
     width: 150px;
-    /* Expands to a fixed width */
     opacity: 1;
-    /* Makes it fully visible */
     margin-right: 5px;
 }
