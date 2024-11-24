@@ -1,0 +1,104 @@
+/* Allgemeine Einstellungen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Press Start 2P", cursive; /* Pixelige Schriftart */
+    background: linear-gradient(135deg, #ff0080, #ff8c00); /* Neon-Verlauf */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+/* Formular-Styling */
+form {
+    width: 400px;
+    padding: 30px;
+    background: #000; /* Schwarzer Hintergrund für Kontrast */
+    border: 5px solid #ff8c00; /* Neon-Orange Rahmen */
+    border-radius: 15px;
+    box-shadow: 0 0 15px #ff8c00, 0 0 30px #ff0080; /* Leuchtende Effekte */
+    text-align: center;
+}
+
+/* Überschrift */
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #ff0080, 0 0 10px #ff8c00; /* Leuchtende Überschrift */
+}
+
+/* Eingabefelder */
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 3px solid #ff8c00; /* Neon-Orange Rahmen */
+    border-radius: 5px;
+    background: #222; /* Dunkler Hintergrund */
+    color: #fff; /* Weiße Schrift */
+    font-size: 1rem;
+    font-family: "Press Start 2P", cursive; /* Pixelige Schrift */
+    text-align: center; /* Text zentrieren */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: #aaa; /* Blassgrau */
+    font-size: 0.9rem;
+}
+
+input:focus {
+    border-color: #ff0080; /* Neon-Pink beim Fokussieren */
+    background: #000; /* Tieferes Schwarz */
+}
+
+/* Button-Styling */
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #ff0080; /* Neon-Pink Hintergrund */
+    color: #fff; /* Weiße Schrift */
+    font-size: 1rem;
+    font-family: "Press Start 2P", cursive; /* Pixelige Schrift */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #ff8c00, 0 0 15px #ff0080; /* Leuchtender Button */
+}
+
+button:hover {
+    background: #ff8c00; /* Wechsel zu Neon-Orange */
+    box-shadow: 0 0 10px #ff0080, 0 0 20px #ff8c00; /* Leuchtende Effekte verstärken */
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Anpassung für kleinere Bildschirme */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    input {
+        font-size: 0.8rem;
+    }
+
+    button {
+        font-size: 0.8rem;
+    }
+}
