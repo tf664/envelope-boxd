@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $error_message = "";
 require("connection.php");
 

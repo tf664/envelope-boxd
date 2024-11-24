@@ -1,9 +1,13 @@
+<?php
+session_start();
+
+if (empty($_SESSION["username"])) {
+    header("Location: loginSystem/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
-<?php
-
-?>
 
 <head>
     <meta charset="UTF-8">
