@@ -23,7 +23,7 @@ if (empty($_SESSION["username"])) {
     <main>
         <h1>Searched Movies:</h1>
         <button id="scroll-left" class="scroll-button">⬅️</button>
-        <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly --> </div>
+        <div classs="movie-container" id="movie-list"> <!-- The container will hold the movie items directly --> </div>
         <button id="scroll-right" class="scroll-button">➡️</button>
     </main>
 
