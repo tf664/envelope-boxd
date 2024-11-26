@@ -66,14 +66,18 @@ async function displayMovies(movies) {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
 
+        // Use the movie title in the URL query string
         movieItem.innerHTML = `
-            <img src="${movie.imageUrl}" alt="${movie.title}" class="movie-poster">
-            <p class="movie-title">${movie.title}</p>
+            <a href="pagesHTML/specificMovie.php?title=${encodeURIComponent(movie.title)}" class="movie-link">
+                <img src="${movie.imageUrl}" alt="${movie.title}" class="movie-poster">
+                <p class="movie-title">${movie.title}</p>
+            </a>
         `;
 
         movieContainer.appendChild(movieItem);
     }
 }
+
 
 async function init() {
     const searchInput = document.getElementById('search-input');
