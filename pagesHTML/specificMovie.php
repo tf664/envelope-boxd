@@ -80,59 +80,8 @@ if (isset($_GET['title'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .movie-details {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .movie-details img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .movie-details h1 {
-            margin-top: 20px;
-            font-size: 2em;
-            color: #333;
-        }
-
-        .movie-details p {
-            font-size: 1.2em;
-            color: #555;
-        }
-
-        .movie-details .movie-title {
-            font-weight: bold;
-        }
-
-        .movie-details .movie-attributes {
-            margin-top: 15px;
-        }
-
-        .movie-details .movie-attributes strong {
-            font-weight: bold;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../headerStyle.css">
 </head>
 
 <body>
@@ -162,8 +111,7 @@ if (isset($_GET['title'])) {
     </main>
 
     <footer>
-        <!-- Footer Content (Optional) -->
-        <p style="text-align: center;">&copy; 2024 Movie App</p>
+        <p class="movie-attributes" style="text-align: center;">EnvelopeBaskd</p>
     </footer>
 
 </body>

@@ -1,0 +1,80 @@
+/* Global styles */
+body {
+    font-family: 'Press Start 2P', monospace; /* Retro font */
+    background-color: #f0e6b8; /* Vintage yellowish background */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Dark text for general readability */
+}
+
+/* Header styles */
+header {
+    background-color: #181311; /* Deep brown header for retro feel */
+    color: aliceblue; /* Light text for contrast */
+    padding: 20px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace; /* Retro font */
+    font-size: 1.2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+/* Movie Details Styles */
+.movie-details {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff; /* White background for movie container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the movie box */
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+}
+
+/* Movie Image */
+.movie-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Movie Title */
+.movie-details h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #8a4b3b; /* Deep brown for the title */
+    font-family: 'Press Start 2P', monospace; /* Retro font */
+    font-weight: normal;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15); /* Subtle text shadow for vintage feel */
+}
+
+/* Movie Description Text */
+.movie-details p {
+    font-size: 1.2em;
+    color: #555; /* Dark gray for text */
+    line-height: 1.5;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Movie Title Class */
+.movie-details .movie-title {
+    font-weight: bold;
+    color: #8a4b3b; /* Deep brown for emphasis */
+    font-family: 'Press Start 2P', monospace;
+    font-weight: normal;
+}
+
+/* Movie Attributes (like year, director, etc.) */
+.movie-details .movie-attributes {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555; /* Dark gray for general text */
+}
+
+.movie-details .movie-attributes strong {
+    font-weight: bold;
+    color: #8a4b3b; /* Deep brown for attribute labels */
+    font-family: 'Press Start 2P', monospace;
+    font-weight: normal;
+    font-size: 0.82em;
+}

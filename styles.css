@@ -1,21 +1,40 @@
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
 }
 
+html,
+body {
+    height: 100%;
+    font-family: 'Press Start 2P', monospace; /* Consistent pixel font */
+    background-color: #f0e6b8; /* Vintage background color */
+    color: #333; /* Default text color */
+    text-align: center;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png'); /* Retro background pattern */
+    background-repeat: repeat;
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Banner Styling */
 .banner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em;
-    background-color: #333;
-    color: aliceblue;
+    background-color: #333; /* Dark background for banner */
+    color: aliceblue; /* Light text color for contrast */
 }
 
 .logo {
     font-size: 1.5em;
+    color: #f5a623; /* Retro accent color for logo */
 }
 
 /* General Menu Styles */
@@ -29,7 +48,6 @@
 .menu-item {
     cursor: pointer;
     padding: 12px;
-    /* Increased padding for better clickability */
     font-size: 1.2em;
     color: aliceblue;
     transition: transform 0.3s ease, border-color 0.3s ease;
@@ -37,57 +55,41 @@
 }
 
 .menu-item:hover {
-    transform: scale(1.1);
-    /* Slight zoom effect */
-    border-color: #fff;
-    /* White underline on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+    border-color: #fff; /* White underline on hover */
 }
 
+/* Movie Container Styling */
 .movie-container {
     display: flex;
     overflow-x: scroll;
-    /* Enable horizontal scrolling */
     height: 300px;
-    /* Set a fixed height */
     scrollbar-width: none;
-    /* For Firefox */
     -ms-overflow-style: none;
-    /* For Internet Explorer and Edge */
     scroll-behavior: smooth;
-    /* Smooth scrolling */
     align-items: flex-end;
-    /* Align items to the bottom */
 }
 
 .movie-container::-webkit-scrollbar {
-    display: none;
-    /* For Chrome, Safari, and Opera */
+    display: none; /* Hide scrollbar */
 }
 
 .movie-item {
     flex: 0 0 auto;
-    /* Prevent items from shrinking */
     margin: 10px;
     text-align: center;
     width: 150px;
-    /* Set a fixed width for movie items */
     height: 250px;
-    /* Set a fixed height for movie items */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    /* Align content to the bottom */
 }
 
 .movie-item img {
     width: 100%;
-    /* Make the image take the full width of the movie item */
     height: auto;
-    /* Maintain aspect ratio */
     max-height: 200px;
-    /* Set a maximum height for the images */
     object-fit: contain;
-    /* Ensure the image fits within the container without distortion */
 }
 
 .movie-title {
@@ -96,9 +98,7 @@
     margin-top: 5px;
 }
 
-
-
-
+/* Scroll Button Styling */
 .scroll-button {
     background-color: #333;
     color: white;
@@ -119,11 +119,7 @@
     right: 10px;
 }
 
-
-
-
-
-/* Search bar container and icon styles */
+/* Search Bar Container and Icon Styling */
 .search-container {
     position: relative;
     display: flex;
@@ -132,14 +128,15 @@
 }
 
 .search-input {
-    /* Initially hidden */
     width: 0;
     opacity: 0;
     padding: 5px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 2px solid #d4b183; /* Golden border for search */
     border-radius: 5px;
     transition: width 0.4s ease, opacity 0.4s ease;
+    background-color: #f5f0e1; /* Light beige background */
+    color: #333; /* Default text color */
 }
 
 .icon {
@@ -152,4 +149,92 @@
     width: 150px;
     opacity: 1;
     margin-right: 5px;
+}
+
+/* General Styling Adjustments */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #d4b183; /* Golden border for input fields */
+    border-radius: 5px;
+    background: #f5f0e1; /* Light beige background */
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+    letter-spacing: 1px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+input:focus {
+    border-color: #f5a623; /* Orange focus effect */
+    background: #fff;
+}
+
+/* Submit Button Styling */
+input[type="submit"] {
+    width: 80%;
+    padding: 10px;
+    margin-top: 20px;
+    border: 3px solid #8a4b3b; /* Golden button border */
+    border-radius: 5px;
+    background: #f5f0e1;
+    color: #333;
+    font-size: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    cursor: pointer;
+    transition: background 0.3s ease, border 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"]:hover {
+    background: #d4b183; /* Golden button hover */
+    border-color: #f5a623;
+}
+
+input[type="submit"]:focus {
+    outline: none;
+}
+
+/* Error Message Styling */
+.error-message {
+    margin-top: 15px;
+    color: red;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Redirect Styling */
+.redirect {
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+    color: #8a4b3b;
+}
+
+.redirect p {
+    margin-bottom: 10px;
+}
+
+.redirect-link {
+    text-decoration: none;
+    color: #f5a623;
+    font-weight: bold;
+    border: 2px solid #f5a623;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.redirect-link:hover {
+    background: #f5a623;
+    color: #fff;
 }

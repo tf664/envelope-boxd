@@ -4,61 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie List</title>
-
-    <style>
-        /* CSS for page transition */
-        .page-transition {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: calc(100% - var(--header-height)); /* Calculate height dynamically */
-            background: rgba(0, 0, 0, 0.8); /* Black background with opacity */
-            transform: translateY(100%); /* Initially off-screen (below viewport) */
-            transition: transform 0.5s ease, opacity 0.5s ease;
-            opacity: 0;
-            z-index: 9999;
-        }
-
-        .page-transition.show {
-            transform: translateY(0); /* Slide into view, stopping below header */
-            opacity: 1; /* Fade in */
-        }
-
-        /* Header styles for reference */
-        .banner {
-            position: relative;
-            height: 70px; /* Fixed header height */
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 10; /* Ensure the header stays above */
-        }
-
-        .menu {
-            display: flex;
-            gap: 20px;
-        }
-
-        .menu-item {
-            cursor: pointer;
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input {
-            margin-right: 10px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="headerStyle.css">
 </head>
 <body>
-    <!-- Page transition element -->
     <div class="page-transition"></div>
 
     <header class="banner">
