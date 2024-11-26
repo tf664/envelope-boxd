@@ -1,70 +1,67 @@
 <?php
 session_start();
 
-if (isset($_POST['login'])) {
+$error_message = "";
+require("connection.php");
 
-    // Include database connection
-    include 'db_connect.php'; // Stelle sicher, dass diese Datei die Verbindung aufsetzt
+if (isset($_POST["submit"])) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-    // Prepare and bind the SQL statement
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
-    $username = htmlspecialchars(trim($_POST['username'])); // Input sanitization
-    $password = $_POST['password'];
-    $stmt->bind_param("s", $username);
-
-    // Execute the SQL statement
+    // Prepare and execute query
+    $stmt = $con->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->bindParam(":username", $username);
     $stmt->execute();
-    $stmt->store_result();
+    $userExists = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Check if the user exists
-    if ($stmt->num_rows > 0) {
-
-        // Bind the result to variables
-        $stmt->bind_result($id, $hashed_password);
-
-        // Fetch the result
-        $stmt->fetch();
-
-        // Verify the password
-        if (password_verify($password, $hashed_password)) {
-            // Set the session variables
-            $_SESSION['loggedin'] = true;
-            $_SESSION['user_id'] = $id;
-            $_SESSION['username'] = $username;
-
-            // Redirect user to the intended page or homepage
-            $redirect = isset($_SESSION['redirect_to']) ? $_SESSION['redirect_to'] : 'index.php';
-            unset($_SESSION['redirect_to']); // Remove the session variable
-            header("Location: $redirect");
-            exit;
-        } else {
-            $error = "Invalid login credentials."; // General error message
+    if ($userExists) {
+        $passwordHashed = $userExists["password"];
+        $checkPassword = password_verify($password, $passwordHashed);
+        if ($checkPassword === false) {
+            $error_message = "Invalid username or password";
+        } else if ($checkPassword === true) {
+            // Logins the user
+            $_SESSION["username"] = $userExists["username"];
+            header("Location: ../index.php");  // Redirect to the home page
+            exit();
         }
     } else {
-        $error = "Invalid login credentials."; // General error message
+        $error_message = "Invalid username or password";
     }
-    // Close the connection
-    $stmt->close();
-    $conn->close();
 }
-
 ?>
-<!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="loginSystemStyle.css">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <form action="login.php" method="post">
-        <h2>Login</h2>
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <label for="username">Username:</label>
-        <input id="username" name="username" required type="text" />
-        <label for="password">Password:</label>
-        <input id="password" name="password" required type="password" />
-        <input name="login" type="submit" value="Login" />
-    </form>
+    <!-- Login form -->
+    <div class="container">
+        <form action="login.php" method="post">
+            <h1>Login</h1>
+            <div class="inputs_container">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <input type="submit" name="submit" value="Login">
+
+            <!-- Error message -->
+            <?php if (!empty($error_message)) {
+                echo "<div class='error-message'>$error_message</div>";
+            } ?>
+        </form>
+    </div>
+    <!-- Register redirect -->
+    <div class="redirect">
+        <p>Have no account?</p>
+        <a href="register.php" class="redirect-link">Press here to register</a>
+    </div>
 </body>
+
 </html>
