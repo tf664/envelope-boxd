@@ -53,7 +53,6 @@ async function fetchMovies(query) {
     }
 }
 
-
 async function displayMovies(movies) {
     const movieContainer = document.getElementById('movie-list');
     movieContainer.innerHTML = ''; // Clear previous content
