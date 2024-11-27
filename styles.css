@@ -50,6 +50,7 @@ html, body {
 .logo {
     font-size: 1.2em;
     color: #f5a623;
+    text-decoration: none;
 }
 
 /* General Menu Styles */
@@ -72,8 +73,7 @@ html, body {
 }
 
 .menu-item:hover {
-    color: #f5a623;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 /* Main Content Styling */
@@ -290,14 +290,16 @@ main {
 .page-transition {
     display: none;
     position: absolute;
-    top: 0;
+    top: 100%;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 9999;
+    transition: top 0.5s ease-in-out;
 }
 
 .page-transition.show {
     display: block;
+    top: 0;
 }
