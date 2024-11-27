@@ -55,7 +55,7 @@
                     } else if (item.id === 'about') {
                         window.location.href = 'pagesHTML/about.html';
                     } else if (item.id === 'logout') {
-                        window.location.href = 'loginSystem/logout.php';
+                        window.location.href = '/EnvelopeBaskd/envelope-baskd/loginSystem/logout.php';
                     }
                 }, 500); // 500ms delay to allow transition to complete
             });
