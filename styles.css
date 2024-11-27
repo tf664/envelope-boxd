@@ -32,6 +32,12 @@ html, body {
     padding: 10px;
 }
 
+
+
+
+
+
+/* Banner Styling */
 /* Banner Styling */
 .banner {
     display: flex;
@@ -60,6 +66,11 @@ html, body {
     gap: 0.5em;
     align-items: center;
     position: relative;
+    transition: margin-right 0.3s ease;
+}
+
+.menu.search-active {
+    margin-right: 150px; /* Adjust margin as needed */
 }
 
 /* Menu Item Styling */
@@ -80,53 +91,36 @@ html, body {
 /* Main Content Styling */
 main {
     margin-top: 100px; /* Adjust for header height */
-    max-width: 1200px;
-    text-align: center;
-    padding: 20px;
-    flex-grow: 1;
 }
 
-/* Movie Container Styling */
-.movie-container {
+/* Search Container Styling */
+.search-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
+    align-items: center;
+    gap: 10px;
+    position: relative;
 }
 
-/* Movie Item Styling */
-.movie-item {
-    flex: 1 0 250px;
-    max-width: 200px;
-    width: 100%;
-    height: auto;
-    margin: 10px;
-    text-align: center;
+.search-input {
+    padding: 5px;
+    font-size: 1em;
+    width: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
 }
 
-/* Movie Poster Styling */
-.movie-poster {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: contain;
+.search-container.search-active .search-input {
+    width: 150px; /* Adjust width as needed */
+    opacity: 1;
 }
 
-/* Movie Title Styling */
-.movie-title {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #333;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.3;
-    text-align: center;
-    max-height: 60px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+.icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.search-container.search-active .icon {
+    transform: translateX(-10px); /* Adjust to keep the icon close to the input */
 }
 
 /* Movie Details Styling */
@@ -176,39 +170,95 @@ main {
     color: #8a4b3b; /* Deep brown for strong text */
 }
 
+
+
+
 /* Search Bar Container and Icon Styling */
 .search-container {
-    position: relative;
+    position: relative; /* Makes the search container the reference point */
     display: flex;
-    align-items: center; /* Align the search input and icon vertically */
+    align-items: center; /* Aligns the icon and input vertically */
+    z-index: 1;
 }
 
+/* Initial hidden state of search input */
 .search-input {
-    display: none;  /* Initially hide the input */
-    padding: 0.5em;
-    font-size: 1em;
-    width: 200px;  /* Adjust width as per your requirement */
-    transition: opacity 0.3s ease;
+    width: 0;               /* Initially collapsed width */
+    opacity: 0;             /* Initially invisible */
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;     /* Position it to the left of the search icon */
+    top: 50%;               /* Vertically center align with icon */
+    transform: translateY(-50%);
+    right: 0;              
+    transition: width 0.6s ease, opacity 0.6s ease, left 0.6s ease; /* Smooth transition*/
+    z-index: -1;            
 }
 
+/* When the search input is active (expanded) */
 .search-active .search-input {
-    display: block; /* Show the input when .search-active class is added */
+    width: 150px;           /*desired width */
+    opacity: 1;            
+    left: -150px;           /* Move it to the left from the icon */
+    z-index: 10;            /* Bring it above the header */
 }
 
+/* When the search input is inactive (collapsed) */
+.search-input {
+    width: 0;              
+    opacity: 0;           
+    left: 0;                /* Hide behind the icon */
+    z-index: -1;            /* Behind the header */
+}
+
+/* Menu Styling - Adjusting menu items when search input is expanded */
+.menu {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    position: relative;
+    transition: transform 0.4s ease; /* Smooth transition when the menu moves */
+}
+
+/* When search input is active */
+.search-active ~ .menu {
+    transform: translateX(-160px);  /* Shift menu items when search bar is expanded */
+}
+
+/* Ensure menu items are visible */
+.menu-item {
+    font-size: 0.8em;
+    padding: 0.4em 0.8em;
+    transition: color 0.3s ease, transform 0.3s ease, font-size 0.4s ease;
+}
+
+/* Smaller font size when search input is visible */
+.search-active ~ .menu .menu-item {
+    font-size: 0.7em;
+}
+
+/* Search Icon Styling */
 .icon {
     font-size: 1.5em;
     cursor: pointer;
-    transition: transform 0.4s ease;
+    transition: transform 0.6s ease;
 }
 
-.search-input:focus {
-    outline: none;  /* Removes default focus outline */
-    border: 2px solid #6a1b9a;  /* Golden yellow for focus border */
-}
-
+/* Adjusting the placeholder size inside the search bar */
 .search-input::placeholder {
     color: #bbb;  /* Placeholder text color */
+    font-size: 0.8rem;  /* Adjust placeholder size */
 }
+
+/* Focus Styling for Search Input */
+.search-input:focus {
+    outline: none;  /* Removes default focus outline */
+    border: 2px solid #6a1b9a;  
+
+
+
 
 /* Error Message Styling */
 .error-message {
