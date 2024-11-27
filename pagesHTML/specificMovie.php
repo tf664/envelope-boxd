@@ -74,7 +74,7 @@ if (isset($_GET['title'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../headerStyle.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 
@@ -94,7 +94,7 @@ if (isset($_GET['title'])) {
     </main>
 
     <footer>
-        <p style="text-align: center;">EnvelopeBaskd</p>
+        <p style="text-align: center;" class="footer">EnvelopeBaskd</p>
     </footer>
 
 </body>

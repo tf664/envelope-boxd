@@ -5,6 +5,11 @@ if (empty($_SESSION["username"])) {
     header("Location: loginSystem/login.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_URI'] == '/EnvelopeBaskd/envelope-baskd/') {
+    header('Location: /EnvelopeBaskd/envelope-baskd/index.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

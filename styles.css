@@ -1,12 +1,11 @@
 /* General Styles */
 * {
     margin: 0;
-    padding: 0;  /* Remove padding from all elements */
-    box-sizing: border-box; /* Better control over layout */
-    font-family: 'Press Start 2P', monospace;
+    padding: 0.3em;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
 }
 
-/* Body and html */
 html, body {
     height: 100%;
     font-family: 'Press Start 2P', monospace;
@@ -20,34 +19,87 @@ html, body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 0; /* Ensure there's no unwanted padding */
+    padding: 0;
     overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.footer {
+    align-content: center, baseline;
+    font-size: smaller;
+    color:#7e7e7b;
+
+}
+
+/* Banner Styling */
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    background-color: #333;
+    color: aliceblue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.2em;
+    color: #f5a623;
+}
+
+/* General Menu Styles */
+.menu {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    position: relative;
+}
+
+/* Menu Item Styling */
+.menu-item {
+    cursor: pointer;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-item:hover {
+    color: #f5a623;
+    transform: scale(1.1);
 }
 
 /* Main Content Styling */
 main {
-    margin-top: 80px; /* Adjust this value based on the header height */
+    margin-top: 100px; /* Adjust for header height */
     max-width: 1200px;
     text-align: center;
     padding: 20px;
-    flex-grow: 1; /* Allow main to grow and push footer down */
+    flex-grow: 1;
 }
 
 /* Movie Container Styling */
 .movie-container {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping of items */
-    justify-content: center; /* Center items horizontally */
-    gap: 20px; /* Space between movie items */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     padding: 20px;
-    width: 100%; /* Ensure full container width */
+    width: 100%;
 }
 
 /* Movie Item Styling */
 .movie-item {
-    flex: 1 0 250px; /* Allow flex grow but set a minimum width */
-    max-width: 200px; /* Set a max width for each movie item */
-    width: 100%; /* Ensures that the movie item scales properly */
+    flex: 1 0 250px;
+    max-width: 200px;
+    width: 100%;
     height: auto;
     margin: 10px;
     text-align: center;
@@ -55,10 +107,10 @@ main {
 
 /* Movie Poster Styling */
 .movie-poster {
-    width: 100%; /* Ensure the poster takes full width */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-    object-fit: contain; /* Ensures images fill their containers */
+    object-fit: contain;
 }
 
 /* Movie Title Styling */
@@ -66,36 +118,95 @@ main {
     margin-top: 10px;
     font-size: 0.9em;
     color: #333;
-    word-wrap: break-word; /* Ensure long titles wrap correctly */
-    overflow-wrap: break-word; /* Prevents text overflow */
-    line-height: 1.3; /* More readable */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
     text-align: center;
-    max-height: 60px; /* Limit the height of titles */
-    overflow: hidden; /* Hide excess text */
-    text-overflow: ellipsis; /* Add ellipsis for cut-off text */
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: normal;
 }
 
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
-    .movie-item {
-        flex: 1 0 100%; /* Stack items vertically on smaller screens */
-        max-width: 100%; /* Ensure they take full width */
-    }
+/* Movie Details Styling */
+.movie-details {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Press Start 2P', monospace;
 }
 
-/* For larger screen sizes, allow movie items to grow and be more spacious */
-@media (min-width: 1200px) {
-    .movie-item {
-        flex: 1 0 250px; /* Allow movie items to grow but have a minimum width */
-        max-width: 250px; /* Set a max width for larger screens */
-    }
+.movie-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
+/* Movie Title */
+.movie-details h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #8a4b3b;
+    font-weight: normal;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+}
 
-/* Scroll Button Styling */
-#scroll-right {
-    right: 10px;
+/* Movie Description Text */
+.movie-details p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Movie Attributes */
+.movie-attributes {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.movie-attributes strong {
+    font-weight: bold;
+    color: #8a4b3b;
+}
+
+/* Search Bar Container and Icon Styling */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center; /* Align the search input and icon vertically */
+}
+
+.search-input {
+    display: none;  /* Initially hide the input */
+    padding: 0.5em;
+    font-size: 1em;
+    width: 200px;  /* Adjust width as per your requirement */
+    transition: opacity 0.3s ease;
+}
+
+.search-active .search-input {
+    display: block; /* Show the input when .search-active class is added */
+}
+
+.icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.search-input:focus {
+    outline: none;  /* Removes default focus outline */
+    border: 2px solid #f5a623;  /* Custom focus outline */
+}
+
+.search-input::placeholder {
+    color: #bbb;  /* Placeholder text color */
 }
 
 /* Error Message Styling */
@@ -135,63 +246,58 @@ main {
     color: #fff;
 }
 
-/* Movie Details Styles */
-.movie-details {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff; /* White background for movie container */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the movie box */
-    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+/* Movie Details Responsive Styling */
+@media (max-width: 768px) {
+    .movie-details {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .movie-details img {
+        width: 100%;
+    }
+
+    .movie-attributes {
+        font-size: 1rem;
+    }
+
+    .movie-item {
+        flex: 1 0 100%;
+        max-width: 100%;
+    }
 }
 
-/* Movie Image */
-.movie-details img {
+@media (max-width: 480px) {
+    .banner {
+        padding: 0.5em;
+    }
+
+    .menu-item {
+        font-size: 0.8em;
+    }
+
+    .movie-details h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* Scroll Button Styling */
+#scroll-right {
+    right: 10px;
+}
+
+/* Page Transition Styles */
+.page-transition {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
 }
 
-/* Movie Title */
-.movie-details h1 {
-    margin-top: 20px;
-    font-size: 2em;
-    color: #8a4b3b; /* Deep brown for the title */
-    font-family: 'Press Start 2P', monospace; /* Retro font */
-    font-weight: normal;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15); /* Subtle text shadow for vintage feel */
-}
-
-/* Movie Description Text */
-.movie-details p {
-    font-size: 1.2em;
-    color: #555; /* Dark gray for text */
-    line-height: 1.5;
-    margin-top: 10px;
-    font-size: 0.9em;
-}
-
-/* Movie Title Class */
-.movie-details .movie-title {
-    font-weight: bold;
-    color: #8a4b3b; /* Deep brown for emphasis */
-    font-family: 'Press Start 2P', monospace;
-    font-weight: normal;
-}
-
-/* Movie Attributes (like year, director, etc.) */
-.movie-details .movie-attributes {
-    margin-top: 15px;
-    font-size: 1.1em;
-    color: #555; /* Dark gray for general text */
-}
-
-.movie-details .movie-attributes strong {
-    font-weight: bold;
-    color: #8a4b3b; /* Deep brown for attribute labels */
-    font-family: 'Press Start 2P', monospace;
-    font-weight: normal;
-    font-size: 0.82em;
+.page-transition.show {
+    display: block;
 }
