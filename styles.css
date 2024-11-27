@@ -1,145 +1,197 @@
+/* General Styles */
 * {
     margin: 0;
-    padding: 0;
+    padding: 0.3em;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
 }
 
+html, body {
+    height: 100%;
+    font-family: 'Press Start 2P', monospace;
+    background-color: #f0e6b8;
+    color: #333;
+    text-align: center;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    background-repeat: repeat;
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.footer {
+    align-content: center, baseline;
+    font-size: smaller;
+    color:#7e7e7b;
+
+}
+
+/* Banner Styling */
 .banner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: 0.5em 1em;
     background-color: #333;
     color: aliceblue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    color: #f5a623;
+    text-decoration: none;
 }
 
 /* General Menu Styles */
 .menu {
     display: flex;
-    gap: 1em;
+    gap: 0.5em;
     align-items: center;
     position: relative;
 }
 
+/* Menu Item Styling */
 .menu-item {
     cursor: pointer;
-    padding: 12px;
-    /* Increased padding for better clickability */
-    font-size: 1.2em;
-    color: aliceblue;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    border-bottom: 2px solid transparent;
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .menu-item:hover {
-    transform: scale(1.1);
-    /* Slight zoom effect */
-    border-color: #fff;
-    /* White underline on hover */
+    transform: scale(1.2);
 }
 
+/* Main Content Styling */
+main {
+    margin-top: 100px; /* Adjust for header height */
+    max-width: 1200px;
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Movie Container Styling */
 .movie-container {
     display: flex;
-    overflow-x: scroll;
-    /* Enable horizontal scrolling */
-    height: 300px;
-    /* Set a fixed height */
-    scrollbar-width: none;
-    /* For Firefox */
-    -ms-overflow-style: none;
-    /* For Internet Explorer and Edge */
-    scroll-behavior: smooth;
-    /* Smooth scrolling */
-    align-items: flex-end;
-    /* Align items to the bottom */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
 }
 
-.movie-container::-webkit-scrollbar {
-    display: none;
-    /* For Chrome, Safari, and Opera */
-}
-
+/* Movie Item Styling */
 .movie-item {
-    flex: 0 0 auto;
-    /* Prevent items from shrinking */
+    flex: 1 0 250px;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
     margin: 10px;
     text-align: center;
-    width: 150px;
-    /* Set a fixed width for movie items */
-    height: 250px;
-    /* Set a fixed height for movie items */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    /* Align content to the bottom */
 }
 
-.movie-item img {
+/* Movie Poster Styling */
+.movie-poster {
     width: 100%;
-    /* Make the image take the full width of the movie item */
     height: auto;
-    /* Maintain aspect ratio */
-    max-height: 200px;
-    /* Set a maximum height for the images */
+    border-radius: 10px;
     object-fit: contain;
-    /* Ensure the image fits within the container without distortion */
 }
 
+/* Movie Title Styling */
 .movie-title {
-    font-size: 1em;
-    color: #fff;
-    margin-top: 5px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #333;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    text-align: center;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 
-
-
-
-.scroll-button {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+/* Movie Details Styling */
+.movie-details {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Press Start 2P', monospace;
 }
 
-#scroll-left {
-    left: 10px;
+.movie-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
-#scroll-right {
-    right: 10px;
+/* Movie Title */
+.movie-details h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #8a4b3b;
+    font-weight: normal;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
+/* Movie Description Text */
+.movie-details p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 10px;
+}
 
+/* Movie Attributes */
+.movie-attributes {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555;
+}
 
+.movie-attributes strong {
+    font-weight: bold;
+    color: #8a4b3b;
+}
 
-
-/* Search bar container and icon styles */
+/* Search Bar Container and Icon Styling */
 .search-container {
     position: relative;
     display: flex;
-    align-items: center;
-    transition: width 0.3s ease;
+    align-items: center; /* Align the search input and icon vertically */
 }
 
 .search-input {
-    /* Initially hidden */
-    width: 0;
-    opacity: 0;
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: width 0.4s ease, opacity 0.4s ease;
+    display: none;  /* Initially hide the input */
+    padding: 0.5em;
+    font-size: 1em;
+    width: 200px;  /* Adjust width as per your requirement */
+    transition: opacity 0.3s ease;
+}
+
+.search-active .search-input {
+    display: block; /* Show the input when .search-active class is added */
 }
 
 .icon {
@@ -148,8 +200,106 @@
     transition: transform 0.4s ease;
 }
 
-.search-active .search-input {
-    width: 150px;
-    opacity: 1;
-    margin-right: 5px;
+.search-input:focus {
+    outline: none;  /* Removes default focus outline */
+    border: 2px solid #f5a623;  /* Custom focus outline */
+}
+
+.search-input::placeholder {
+    color: #bbb;  /* Placeholder text color */
+}
+
+/* Error Message Styling */
+.error-message {
+    margin-top: 15px;
+    color: red;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Redirect Styling */
+.redirect {
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+    color: #8a4b3b;
+}
+
+.redirect p {
+    margin-bottom: 10px;
+}
+
+.redirect-link {
+    text-decoration: none;
+    color: #f5a623;
+    font-weight: bold;
+    border: 2px solid #f5a623;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.redirect-link:hover {
+    background: #f5a623;
+    color: #fff;
+}
+
+/* Movie Details Responsive Styling */
+@media (max-width: 768px) {
+    .movie-details {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .movie-details img {
+        width: 100%;
+    }
+
+    .movie-attributes {
+        font-size: 1rem;
+    }
+
+    .movie-item {
+        flex: 1 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        padding: 0.5em;
+    }
+
+    .menu-item {
+        font-size: 0.8em;
+    }
+
+    .movie-details h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* Scroll Button Styling */
+#scroll-right {
+    right: 10px;
+}
+
+/* Page Transition Styles */
+.page-transition {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    transition: top 0.5s ease-in-out;
+}
+
+.page-transition.show {
+    display: block;
+    top: 0;
 }
