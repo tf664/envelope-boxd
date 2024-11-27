@@ -92,7 +92,7 @@ input::placeholder {
 }
 
 input:focus {
-    border-color: #f5a623;
+    border-color: #6a1b9a;
     /* Subtle orange focus effect */
     background: #fff;
     /* Bright white background when focused */
@@ -120,9 +120,9 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: #d4b183;
+    background: #e0deda;
     /* Golden button hover */
-    border-color: #f5a623;
+    border-color: #6a1b9a;
     /* Slightly brighter golden hover */
 }
 
@@ -139,30 +139,32 @@ input[type="submit"]:focus {
     text-align: center;
 }
 
-
+/* Redirect Styling */
 .redirect {
     margin-top: 5px;
     text-align: center;
     font-family: 'Press Start 2P', monospace;
     font-size: 0.9rem;
-    color: #8a4b3b;
+    color: #6a1b9a; 
 }
 
 .redirect p {
     margin-bottom: 10px;
 }
 
+/* Redirect Link Styling */
 .redirect-link {
     text-decoration: none;
-    color: #f5a623;
+    color: #8a4b3b; 
     font-weight: bold;
-    border: 2px solid #f5a623;
+    border: 2px solid #8a4b3b;  
     padding: 5px 10px;
     border-radius: 5px;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .redirect-link:hover {
-    background: #f5a623;
-    color: #fff;
+    background: #6a1b9a; 
+    border: 2px solid #6a1b9a;
+    color: #fff;  
 }
