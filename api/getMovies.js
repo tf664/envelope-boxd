@@ -1,10 +1,10 @@
 async function fetchMovies(query) {
-    const url = `https://imdb8.p.rapidapi.com/v2/search?searchTerm=${encodeURIComponent(query)}`;
+    const url = `https://online-movie-database.p.rapidapi.com/v2/search?searchTerm==${encodeURIComponent(query)}`;
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': '099c93e59bmsh5b63b7ecbb52195p1ea84djsn00ea468a0e19', // Hide this in production
-            'x-rapidapi-host': 'imdb8.p.rapidapi.com'
+         'x-rapidapi-key': 'a04bf9fee4msh9eee9a62a7091abp13defdjsn5191c7091294',
+		'x-rapidapi-host': 'online-movie-database.p.rapidapi.com'
         }
     };
 

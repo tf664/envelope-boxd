@@ -17,10 +17,13 @@ if (empty($_SESSION["username"])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<header>
     <!-- Top Banner -->
     <?php include 'header.php'; ?>
+    </header>
 
+<body>
+    
     <main>
         <h1>Searched Movies:</h1>
         <button id="scroll-left" class="scroll-button">⬅️</button>

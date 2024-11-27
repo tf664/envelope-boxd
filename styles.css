@@ -1,7 +1,6 @@
-/* General Styles */
 * {
     margin: 0;
-    padding: 0;
+    padding: 0.3em;
     box-sizing: border-box;
     font-family: 'Press Start 2P', monospace; /* Retro pixel font */
 }
@@ -27,94 +26,74 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: 0.5em 1em; /* Reduced padding for smaller header */
     background-color: #333; /* Dark background for banner */
     color: aliceblue; /* Light text color for contrast */
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it is above other elements */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
 }
 
 .logo {
-    font-size: 1.5em;
+    font-size: 1.2em; /* Smaller font size for logo */
     color: #f5a623; /* Retro accent color for logo */
 }
 
 /* General Menu Styles */
 .menu {
     display: flex;
-    gap: 1em;
+    gap: 0.5em; /* Reduced gap between menu items */
     align-items: center;
     position: relative;
 }
 
+/* Menu Item Styling */
 .menu-item {
     cursor: pointer;
-    padding: 12px;
-    font-size: 1.2em;
-    color: aliceblue;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    border-bottom: 2px solid transparent;
+    padding: 0.5em 1em; /* Reduced padding for smaller size */
+    font-size: 0.9em; /* Smaller font size */
+    color: white; /* White text for better contrast */
+    text-decoration: none; /* Remove underline */
+    background-color: transparent; /* No background */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .menu-item:hover {
-    transform: scale(1.1); /* Slight zoom effect */
-    border-color: #fff; /* White underline on hover */
+    color: #f5a623; /* Change text color on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
-/* Movie Container Styling */
-.movie-container {
-    display: flex;
-    overflow-x: scroll;
-    height: 300px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    scroll-behavior: smooth;
-    align-items: flex-end;
+/* Main Content Styling */
+main {
+    margin-top: 60px; /* Adjust this value based on the header height */
+    max-width: 1200px;
+    text-align: center;
+    padding: 20px;
 }
 
-.movie-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
-}
-
+/* Movie Item Styling */
 .movie-item {
     flex: 0 0 auto;
     margin: 10px;
     text-align: center;
     width: 150px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.movie-item img {
-    width: 100%;
     height: auto;
     max-height: 200px;
     object-fit: contain;
 }
 
+/* Movie Title Styling */
 .movie-title {
-    font-size: 1em;
-    color: #fff;
-    margin-top: 5px;
-}
-
-/* Scroll Button Styling */
-.scroll-button {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
 }
 
-#scroll-left {
-    left: 10px;
-}
-
+/* Scroll Button Styling */
 #scroll-right {
     right: 10px;
 }
@@ -123,20 +102,6 @@ body {
 .search-container {
     position: relative;
     display: flex;
-    align-items: center;
-    transition: width 0.3s ease;
-}
-
-.search-input {
-    width: 0;
-    opacity: 0;
-    padding: 5px;
-    font-size: 14px;
-    border: 2px solid #d4b183; /* Golden border for search */
-    border-radius: 5px;
-    transition: width 0.4s ease, opacity 0.4s ease;
-    background-color: #f5f0e1; /* Light beige background */
-    color: #333; /* Default text color */
 }
 
 .icon {
@@ -151,46 +116,17 @@ body {
     margin-right: 5px;
 }
 
-/* General Styling Adjustments */
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #d4b183; /* Golden border for input fields */
-    border-radius: 5px;
-    background: #f5f0e1; /* Light beige background */
-    color: #333;
-    font-size: 1rem;
-    text-align: center;
-    outline: none;
-    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
-    letter-spacing: 1px;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
 input::placeholder {
     color: #aaa;
 }
 
 input:focus {
-    border-color: #f5a623; /* Orange focus effect */
-    background: #fff;
-}
-
-/* Submit Button Styling */
-input[type="submit"] {
-    width: 80%;
-    padding: 10px;
     margin-top: 20px;
     border: 3px solid #8a4b3b; /* Golden button border */
     border-radius: 5px;
     background: #f5f0e1;
     color: #333;
     font-size: 1rem;
-    font-family: 'Press Start 2P', monospace;
-    cursor: pointer;
-    transition: background 0.3s ease, border 0.3s ease;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 input[type="submit"]:hover {
@@ -237,4 +173,65 @@ input[type="submit"]:focus {
 .redirect-link:hover {
     background: #f5a623;
     color: #fff;
+}
+
+/* Movie Details Styles */
+.movie-details {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff; /* White background for movie container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the movie box */
+    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+}
+
+/* Movie Image */
+.movie-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Movie Title */
+.movie-details h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #8a4b3b; /* Deep brown for the title */
+    font-family: 'Press Start 2P', monospace; /* Retro font */
+    font-weight: normal;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15); /* Subtle text shadow for vintage feel */
+}
+
+/* Movie Description Text */
+.movie-details p {
+    font-size: 1.2em;
+    color: #555; /* Dark gray for text */
+    line-height: 1.5;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+/* Movie Title Class */
+.movie-details .movie-title {
+    font-weight: bold;
+    color: #8a4b3b; /* Deep brown for emphasis */
+    font-family: 'Press Start 2P', monospace;
+    font-weight: normal;
+}
+
+/* Movie Attributes (like year, director, etc.) */
+.movie-details .movie-attributes {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555; /* Dark gray for general text */
+}
+
+.movie-details .movie-attributes strong {
+    font-weight: bold;
+    color: #8a4b3b; /* Deep brown for attribute labels */
+    font-family: 'Press Start 2P', monospace;
+    font-weight: normal;
+    font-size: 0.82em;
 }

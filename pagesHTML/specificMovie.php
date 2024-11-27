@@ -4,12 +4,12 @@ if (isset($_GET['title'])) {
     $movieTitle = urlencode($_GET['title']); // URL encode the title to make sure it's safe for the URL
 
     // RapidAPI IMDb search URL to get IMDb ID
-    $searchUrl = "https://imdb8.p.rapidapi.com/v2/search?searchTerm=$movieTitle";
+    $searchUrl = "https://online-movie-database.p.rapidapi.com/v2/search?searchTerm=$movieTitle";
 
     $options = [
         "http" => [
-            "header" => "x-rapidapi-key: 099c93e59bmsh5b63b7ecbb52195p1ea84djsn00ea468a0e19\r\n" .
-                "x-rapidapi-host: imdb8.p.rapidapi.com\r\n"
+            "header" => "x-rapidapi-key: a04bf9fee4msh9eee9a62a7091abp13defdjsn5191c7091294\r\n" .
+                "online-movie-database.p.rapidapi.com\r\n"
         ]
     ];
     $context = stream_context_create($options);
@@ -33,16 +33,15 @@ if (isset($_GET['title'])) {
     // Get IMDb ID from the search result (assumes first result is correct)
     $movieData = $searchResults['data']['mainSearch']['edges'][0]['node']['entity'];
 
-    // Get title and year
+    // Extract movie details
+    $movieData = $searchResults['data']['mainSearch']['edges'][0]['node']['entity'];
     $title = $movieData['titleText']['text'] ?? 'Unknown Title';
-    $year = $movieData['releaseYear']['year'] ?? 'Unknown Year'; // Fallback if year is not set
+    $year = $movieData['releaseYear']['year'] ?? 'Unknown Year';
     $posterUrl = $movieData['primaryImage']['url'] ?? 'default-poster.jpg';
 
 
     if (isset($movieData['principalCredits'])) {
         $principalCredits = [];
-
-
         // Loop through the principal credits and collect each name and image URL
         foreach ($movieData['principalCredits'] as $creditsData) {
             foreach ($creditsData['credits'] as $credit) {
@@ -55,16 +54,12 @@ if (isset($_GET['title'])) {
             }
         }
     }
-    // Now, if there are principal credits, display the names
     if (!empty($principalCredits)) {
         $creditNames = [];
-        // Loop through the collefcted principal credits
         foreach ($principalCredits as $credit) {
-            // Add the name to the creditNames array
             $creditNames[] = $credit['name'];
         }
 
-        // Output the names as a comma-separated string
         $stars = htmlspecialchars(implode(", ", $creditNames));
     } else {
         $stars = "No principal credits available.";
@@ -72,46 +67,34 @@ if (isset($_GET['title'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../headerStyle.css">
 </head>
-
 <body>
 
-    <header>
+    <!-- <header>
         <h1>Movie Details</h1>
-    </header>
+    </header> -->
 
     <main>
         <div class="movie-details">
-            <!-- Movie Poster -->
-            <img src="<?php echo htmlspecialchars($posterUrl); ?>" alt="<?php echo htmlspecialchars($title); ?>"
-                class="movie-poster">
-
-            <!-- Movie Title -->
+            <img src="<?php echo htmlspecialchars($posterUrl); ?>" alt="<?php echo htmlspecialchars($title); ?>">
             <h1><?php echo htmlspecialchars($title); ?></h1>
-
-            <!-- Movie Attributes -->
-            <!-- Movie Attributes -->
             <div class="movie-attributes">
                 <p><strong>Year:</strong> <?php echo htmlspecialchars($year); ?></p>
                 <p><strong>Stars:</strong> <?php echo $stars; ?></p>
-                </p>
             </div>
-
-
+        </div>
     </main>
 
     <footer>
-        <p class="movie-attributes" style="text-align: center;">EnvelopeBaskd</p>
+        <p style="text-align: center;">EnvelopeBaskd</p>
     </footer>
 
 </body>
