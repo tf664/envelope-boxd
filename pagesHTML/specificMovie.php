@@ -78,9 +78,9 @@ if (isset($_GET['title'])) {
 </head>
 <body>
 
-    <!-- <header>
-        <h1>Movie Details</h1>
-    </header> -->
+<header>
+    <?php include '../header.php'; ?>
+    </header>
 
     <main>
         <div class="movie-details">

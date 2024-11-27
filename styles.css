@@ -1,141 +1,101 @@
+/* General Styles */
 * {
     margin: 0;
-    padding: 0.3em;
-    box-sizing: border-box;
-    font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+    padding: 0;  /* Remove padding from all elements */
+    box-sizing: border-box; /* Better control over layout */
+    font-family: 'Press Start 2P', monospace;
 }
 
-html,
-body {
+/* Body and html */
+html, body {
     height: 100%;
-    font-family: 'Press Start 2P', monospace; /* Consistent pixel font */
-    background-color: #f0e6b8; /* Vintage background color */
-    color: #333; /* Default text color */
+    font-family: 'Press Start 2P', monospace;
+    background-color: #f0e6b8;
+    color: #333;
     text-align: center;
-    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png'); /* Retro background pattern */
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
     background-repeat: repeat;
     background-size: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-
-/* Banner Styling */
-.banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5em 1em; /* Reduced padding for smaller header */
-    background-color: #333; /* Dark background for banner */
-    color: aliceblue; /* Light text color for contrast */
-    position: fixed; /* Fix the header at the top */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure it is above other elements */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-}
-
-.logo {
-    font-size: 1.2em; /* Smaller font size for logo */
-    color: #f5a623; /* Retro accent color for logo */
-}
-
-/* General Menu Styles */
-.menu {
-    display: flex;
-    gap: 0.5em; /* Reduced gap between menu items */
-    align-items: center;
-    position: relative;
-}
-
-/* Menu Item Styling */
-.menu-item {
-    cursor: pointer;
-    padding: 0.5em 1em; /* Reduced padding for smaller size */
-    font-size: 0.9em; /* Smaller font size */
-    color: white; /* White text for better contrast */
-    text-decoration: none; /* Remove underline */
-    background-color: transparent; /* No background */
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.menu-item:hover {
-    color: #f5a623; /* Change text color on hover */
-    transform: scale(1.1); /* Slightly enlarge on hover */
+    margin: 0;
+    padding: 0; /* Ensure there's no unwanted padding */
+    overflow-x: hidden;
 }
 
 /* Main Content Styling */
 main {
-    margin-top: 60px; /* Adjust this value based on the header height */
+    margin-top: 80px; /* Adjust this value based on the header height */
     max-width: 1200px;
     text-align: center;
     padding: 20px;
+    flex-grow: 1; /* Allow main to grow and push footer down */
+}
+
+/* Movie Container Styling */
+.movie-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of items */
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Space between movie items */
+    padding: 20px;
+    width: 100%; /* Ensure full container width */
 }
 
 /* Movie Item Styling */
 .movie-item {
-    flex: 0 0 auto;
+    flex: 1 0 250px; /* Allow flex grow but set a minimum width */
+    max-width: 200px; /* Set a max width for each movie item */
+    width: 100%; /* Ensures that the movie item scales properly */
+    height: auto;
     margin: 10px;
     text-align: center;
-    width: 150px;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
+}
+
+/* Movie Poster Styling */
+.movie-poster {
+    width: 100%; /* Ensure the poster takes full width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+    object-fit: contain; /* Ensures images fill their containers */
 }
 
 /* Movie Title Styling */
 .movie-title {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #333;
+    word-wrap: break-word; /* Ensure long titles wrap correctly */
+    overflow-wrap: break-word; /* Prevents text overflow */
+    line-height: 1.3; /* More readable */
+    text-align: center;
+    max-height: 60px; /* Limit the height of titles */
+    overflow: hidden; /* Hide excess text */
+    text-overflow: ellipsis; /* Add ellipsis for cut-off text */
+    white-space: normal;
 }
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .movie-item {
+        flex: 1 0 100%; /* Stack items vertically on smaller screens */
+        max-width: 100%; /* Ensure they take full width */
+    }
+}
+
+/* For larger screen sizes, allow movie items to grow and be more spacious */
+@media (min-width: 1200px) {
+    .movie-item {
+        flex: 1 0 250px; /* Allow movie items to grow but have a minimum width */
+        max-width: 250px; /* Set a max width for larger screens */
+    }
+}
+
 
 /* Scroll Button Styling */
 #scroll-right {
     right: 10px;
-}
-
-/* Search Bar Container and Icon Styling */
-.search-container {
-    position: relative;
-    display: flex;
-}
-
-.icon {
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: transform 0.4s ease;
-}
-
-.search-active .search-input {
-    width: 150px;
-    opacity: 1;
-    margin-right: 5px;
-}
-
-input::placeholder {
-    color: #aaa;
-}
-
-input:focus {
-    margin-top: 20px;
-    border: 3px solid #8a4b3b; /* Golden button border */
-    border-radius: 5px;
-    background: #f5f0e1;
-    color: #333;
-    font-size: 1rem;
-}
-
-input[type="submit"]:hover {
-    background: #d4b183; /* Golden button hover */
-    border-color: #f5a623;
-}
-
-input[type="submit"]:focus {
-    outline: none;
 }
 
 /* Error Message Styling */

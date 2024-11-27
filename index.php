@@ -17,25 +17,22 @@ if (empty($_SESSION["username"])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 
+
+<body>
 <header>
     <!-- Top Banner -->
     <?php include 'header.php'; ?>
     </header>
 
-<body>
-    
     <main>
         <h1>Searched Movies:</h1>
-        <button id="scroll-left" class="scroll-button">⬅️</button>
-        <div class="movie-container" id="movie-list"> <!-- The container will hold the movie items directly --> </div>
-        <button id="scroll-right" class="scroll-button">➡️</button>
+        <div class="movie-container" id="movie-list"> 
     </main>
 
     <!-- Debugging -->
 
     <script src="api/getMovies.js"></script>
     <script src="api/searchbar.js"></script> <!-- Toggling the search bar -->
-    <script src="api/scroll.js"></script> <!-- Scroll buttons -->
 </body>
 
 </html>
