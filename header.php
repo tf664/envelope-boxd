@@ -49,11 +49,11 @@
                     // After the transition (500ms), redirect to the new page
                     setTimeout(() => {
                         if (item.id === 'watchlist') {
-                            window.location.href = 'pagesHTML/watchlist.html';
+                            window.location.href = 'pages/watchlist.php';
                         } else if (item.id === 'reviews') {
-                            window.location.href = 'pagesHTML/reviews.html';
+                            window.location.href = 'pages/reviews.html';
                         } else if (item.id === 'about') {
-                            window.location.href = 'pagesHTML/about.html';
+                            window.location.href = 'pages/about.html';
                         } else if (item.id === 'logout') {
                             window.location.href = '/EnvelopeBaskd/envelope-baskd/loginSystem/logout.php';
                         }
