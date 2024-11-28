@@ -2,7 +2,7 @@
 session_start();
 
 if (empty($_SESSION['username'])) {
-    header("Location: /EnvelopeBaskd/envelope-baskd/loginSystem/login.php");
+    header("Location: loginSystem/login.php");
     exit();
 }
 
@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_URI'] == '/EnvelopeBaskd/envelope-baskd/') {
 
 <body>
 <header>
-    <!-- Top Banner -->
     <?php include 'header.php'; ?>
     </header>
 
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_URI'] == '/EnvelopeBaskd/envelope-baskd/') {
     <!-- Debugging -->
 
     <script src="api/getMovies.js"></script>
-    <script src="api/searchbar.js"></script> <!-- Toggling the search bar -->
+    <script src="api/searchbar.js"></script> 
 </body>
 
 </html>

@@ -47,10 +47,10 @@ if (isset($_GET['title'])) {
 
     if (isset($movieData['principalCredits'])) {
         $principalCredits = [];
-        // Loop through the principal credits and collect each name and image URL
+        // Loops through the principal credits and collect each name
         foreach ($movieData['principalCredits'] as $creditsData) {
             foreach ($creditsData['credits'] as $credit) {
-                // Store each name and image URL in the array
+                // Stores each name  in the array
                 if (isset($credit['name']['nameText']['text'])) {
                     $principalCredits[] = [
                         'name' => $credit['name']['nameText']['text'],
@@ -85,7 +85,7 @@ if (isset($_GET['title'])) {
     <link rel="stylesheet" href="/EnvelopeBaskd/envelope-baskd/styles.css">
 </head>
 
-<body>
+<>
     <header>
         <?php include '../header.php'; ?>
     </header>
@@ -104,20 +104,27 @@ if (isset($_GET['title'])) {
     <button id="add-to-watchlist" style="margin-top: -30px;"
         data-movie-id="<?php echo htmlspecialchars($movieData['id']); ?>"
         data-movie-title="<?php echo htmlspecialchars($title); ?>"
-        
         data-movie-poster="<?php echo htmlspecialchars($posterUrl); ?>">Add to Watchlist</button>
+    <br>
+    <button id="add-to-review-list" style="margin-top: -10px;"
+        data-movie-id="<?php echo htmlspecialchars($movieData['id']); ?>"
+        data-movie-title="<?php echo htmlspecialchars($title); ?>"
+        data-movie-poster="<?php echo htmlspecialchars($posterUrl); ?>">Add to Review List</button>
+    <br>
     <p id="watchlist-message" style="color: #333; margin-top: 10px; opacity: 0.6; font-size: 0.8em"></p>
+    <p id="review-list-message" style="color: #333; margin-top: 10px; opacity: 0.6; font-size: 0.8em"></p>
+
 
 
     <footer>
         <p style="text-align: center;" class="footer">EnvelopeBaskd</p>
     </footer>
-</body>
+    </body>
+
 </html>
 
 
-<!-- Logic for adding movie to watchlist with AJAX -->
-<!-- Logic for adding movie to watchlist with AJAX -->
+<!-- Logic with AJAX -->
 <script>
     document.getElementById('add-to-watchlist').addEventListener('click', function () {
         const movieId = this.getAttribute('data-movie-id');
@@ -131,23 +138,55 @@ if (isset($_GET['title'])) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `movie_id=${movieId}&movie_title=${encodeURIComponent(movieTitle)}&movie_poster=${encodeURIComponent(moviePoster)}`
         })
-        // Gets the response text from the server
-        .then(response => response.text())  
+            // Gets the response text from the server
+            .then(response => response.text())
+            .then(data => {
+                messageElement.textContent = data;
+                messageElement.style.color = '#333';
+
+                setTimeout(() => {
+                    messageElement.textContent = '';
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageElement.textContent = "Failed to add movie to watchlist.";
+                messageElement.style.color = '#333';
+                messageElement.textContent = '';
+            }, 1000);
+    });
+
+    // Review add logic
+    document.getElementById('add-to-review-list').addEventListener('click', function () {
+    const movieId = this.getAttribute('data-movie-id');
+    const movieTitle = this.getAttribute('data-movie-title');
+    const moviePoster = this.getAttribute('data-movie-poster');
+    const messageElement = document.getElementById('review-list-message');
+
+    console.log("Adding Movie:", movieId, movieTitle); // Debugging line to confirm movie_id is being passed
+
+    // Send AJAX request using fetch to add the movie to the review list
+    fetch('/EnvelopeBaskd/envelope-baskd/review/addToReview.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `movie_id=${movieId}&movie_title=${encodeURIComponent(movieTitle)}&movie_poster=${encodeURIComponent(moviePoster)}`
+    })
+        .then(response => response.text())
         .then(data => {
-            messageElement.textContent = data; 
-            messageElement.style.color = '#333';  
+            messageElement.textContent = data;
+            messageElement.style.color = '#333';
 
             setTimeout(() => {
-                messageElement.textContent = '';  
-            }, 1000);  
+                messageElement.textContent = '';
+            }, 1000);
         })
         .catch(error => {
             console.error('Error:', error);
-            messageElement.textContent = "Failed to add movie to watchlist.";  
-            messageElement.style.color = '#333';  
-                messageElement.textContent = '';  
-            }, 1000);  
+            messageElement.textContent = "Failed to add movie to review list.";
+            messageElement.style.color = 'red';
+            setTimeout(() => {
+                messageElement.textContent = '';
+            }, 1000);
         });
-    
+});
 </script>
-

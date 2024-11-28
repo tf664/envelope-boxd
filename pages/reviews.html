@@ -1,7 +1,0 @@
-session_start();
-
-if (empty($_SESSION['username'])) {
-    // Redirect if not logged in
-    header("Location: /EnvelopeBaskd/envelope-baskd/loginSystem/login.php");
-    exit();
-}
