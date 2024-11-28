@@ -27,6 +27,8 @@
             </div>
         </div>
     </div>
+
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const menuItems = document.querySelectorAll('.menu-item');
@@ -49,11 +51,11 @@
                     // After the transition (500ms), redirect to the new page
                     setTimeout(() => {
                         if (item.id === 'watchlist') {
-                            window.location.href = 'pages/watchlist.php';
+                            window.location.href = '/EnvelopeBaskd/envelope-baskd/pages/watchlist.php';
                         } else if (item.id === 'reviews') {
-                            window.location.href = 'pages/reviews.html';
+                            window.location.href = '/EnvelopeBaskd/envelope-baskd/pages/reviews.php';
                         } else if (item.id === 'about') {
-                            window.location.href = 'pages/about.html';
+                            window.location.href = '/EnvelopeBaskd/envelope-baskd/pages/about.php';
                         } else if (item.id === 'logout') {
                             window.location.href = '/EnvelopeBaskd/envelope-baskd/loginSystem/logout.php';
                         }
