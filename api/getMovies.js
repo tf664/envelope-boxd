@@ -68,7 +68,7 @@ async function displayMovies(movies) {
 
         // Use the movie title in the URL query string
         movieItem.innerHTML = `
-            <a href="pagesHTML/specificMovie.php?title=${encodeURIComponent(movie.title)}" class="movie-link">
+            <a href="pages/specificMovie.php?title=${encodeURIComponent(movie.title)}" class="movie-link">
                 <img src="${movie.imageUrl}" alt="${movie.title}" class="movie-poster">
                 <p class="movie-title">${movie.title}</p>
             </a>

@@ -25,6 +25,7 @@ if (isset($_POST["submit"])) {
     } else {
         $error_message = "";
         // Register
+            // Hash the password with the bcrypt algorithm
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         registerUser($username, $hashed_password);
     }

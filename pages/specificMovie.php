@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['title'])) {
-    // Movie title from the query string
+
     $movieTitle = urlencode($_GET['title']); // URL encode the title to make sure it's safe for the URL
 
     // RapidAPI IMDb search URL to get IMDb ID
@@ -70,16 +70,18 @@ if (isset($_GET['title'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
 
-<header>
-    <?php include '../header.php'; ?>
+    <header>
+        <?php include '../header.php'; ?>
     </header>
 
     <main>
@@ -93,10 +95,54 @@ if (isset($_GET['title'])) {
         </div>
     </main>
 
+    <button id="add-to-watchlist" style="margin-top: -30px;"
+        data-movie-id="<?php echo htmlspecialchars($movieData['id']); ?>">Add to Watchlist</button>
+    <p id="watchlist-message" style="color: #333; margin-top: 10px; opacity: 0.6; font-size: 0.8em"></p>
+
+
     <footer>
         <p style="text-align: center;" class="footer">EnvelopeBaskd</p>
     </footer>
-
 </body>
-
 </html>
+
+<!-- Logic for adding movie to watchlist -->
+<script>
+    document.getElementById('add-to-watchlist').addEventListener('click', function () {
+    const movieId = this.getAttribute('data-movie-id');
+    const messageElement = document.getElementById('watchlist-message');
+
+    // Send AJAX request using fetch
+    fetch('../watchlist/addToWatchlist.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `movie_id=${movieId}`
+    })
+    .then(response => response.text())  // Get the response text from the server
+    .then(data => {
+        // Update the message with the response
+        messageElement.textContent = data;
+
+        // Set the message color to #333 (dark gray)
+        messageElement.style.color = '#333'; // Force color to #333
+
+        // Hide the message after 1 second
+        setTimeout(() => {
+            messageElement.textContent = '';  // Clear the message
+        }, 1000);  // 1000 ms = 1 second
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        messageElement.textContent = "Failed to add movie to watchlist.";  // Show error message if fetch fails
+
+        // Set the message color to #333 (dark gray) even on error
+        messageElement.style.color = '#333'; // Force color to #333
+
+        // Hide the message after 1 second
+        setTimeout(() => {
+            messageElement.textContent = '';  // Clear the message
+        }, 1000);  // 1000 ms = 1 second
+    });
+});
+
+</script>
