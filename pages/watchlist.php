@@ -1,46 +1,33 @@
 <?php
 session_start();
-require('../loginSystem/connection.php');
 
-// Ensure the user is logged in
-if (!isset($_SESSION['username'])) {
-    echo "You must be logged in to view your watchlist.";
+if (empty($_SESSION['username'])) {
+    // Redirect to login page if not logged in
+    header("Location: /EnvelopeBaskd/envelope-baskd/loginSystem/login.php");
     exit();
 }
 
-// Get the user's ID based on the session username
-$user = $con->prepare("SELECT id FROM users WHERE username = :username");
-$user->bindParam(":username", $_SESSION['username']);
-$user->execute();
-$user = $user->fetch(PDO::FETCH_ASSOC);
+require('../loginSystem/connection.php');
 
-// Check if user exists
+// Get the user's ID based on the session username
+$userStmt = $con->prepare("SELECT id FROM users WHERE username = :username");
+$userStmt->bindParam(":username", $_SESSION['username']);
+$userStmt->execute();
+$user = $userStmt->fetch(PDO::FETCH_ASSOC);
+
 if (!$user) {
     echo "User not found.";
     exit();
 }
 
-$userId = $user['id']; // Store user ID
+$userId = $user['id'];
 
-// Fetch all movie IDs from the watchlist
-$query = "SELECT movie_id FROM watchlist WHERE user_id = :user_id";
+// Fetch all of the movie's information from the user's watchlist
+$query = "SELECT movie_id, movie_title, movie_poster FROM watchlist WHERE user_id = :user_id";
 $statement = $con->prepare($query);
 $statement->bindParam(":user_id", $userId);
 $statement->execute();
-$movieIds = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-// If the user has no movies in the watchlist
-if (empty($movieIds)) {
-    echo "<p>Your watchlist is empty. Add some movies!</p>";
-    exit();
-}
-
-// Extract movie IDs into an array
-$movieIdArray = array_column($movieIds, 'movie_id');
-
-// Convert array to comma-separated string for API call
-$movieIdList = implode(",", $movieIdArray);
-
+$movies = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -55,98 +42,82 @@ $movieIdList = implode(",", $movieIdArray);
 
 <body>
 
-<header>
-    <?php include '../header.php'; ?>
-</header>
+    <header>
+        <?php include '../header.php'; ?>
+    </header>
 
-<main>
-    <h1>Your Watchlist</h1>
+    <main>
+        <h1>Your Watchlist</h1>
 
-    <!-- Display movie list -->
-    <div id="movie-container" class="movie-container"></div>
+        <p id="watchlist-message" style="color: #333; margin-top: 10px; opacity: 0.6; font-size: 0.8em"></p>
 
-    <script>
-        // Fetch movie details from IMDb API using the stored movie IDs
-        async function fetchMovies() {
-            const movieIds = <?php echo json_encode($movieIdList); ?>; // Pass PHP movie IDs to JS
-            const movies = [];
+        <div id="movie-container" class="movie-container">
+            <?php if (empty($movies)): ?>
+                <p>Your watchlist is empty.</p>
+            <?php else: ?>
+                <?php foreach ($movies as $movie): ?>
+                    <div class="movie-item" id="movie-<?php echo htmlspecialchars($movie['movie_id']); ?>">
+                        <a href="/EnvelopeBaskd/envelope-baskd/pages/specificMovie.php?title=<?php echo urlencode($movie['movie_title']); ?>"
+                            class="movie-link">
+                            <img src="<?php echo htmlspecialchars($movie['movie_poster']); ?>"
+                                alt="<?php echo htmlspecialchars($movie['movie_title']); ?>" class="movie-poster">
+                            <p class="movie-title"><?php echo htmlspecialchars($movie['movie_title']); ?></p>
+                        </a>
+                        <button class="remove-from-watchlist"
+                            data-movie-id="<?php echo htmlspecialchars($movie['movie_id']); ?>">Remove from Watchlist</button>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
 
-            for (const movieId of movieIds.split(',')) {
-                const url = `https://online-movie-database.p.rapidapi.com/v2/search?searchTerm=${encodeURIComponent(movieId)}`;
-                const options = {
-                    method: 'GET',
-                    headers: {
-                        'x-rapidapi-key': 'a04bf9fee4msh9eee9a62a7091abp13defdjsn5191c7091294',
-                        'x-rapidapi-host': 'online-movie-database.p.rapidapi.com'
-                    }
-                };
+        <script>
+            document.querySelectorAll('.remove-from-watchlist').forEach(button => {
+                button.addEventListener('click', function () {
+                    const movieId = this.getAttribute('data-movie-id');
+                    const movieItem = this.closest('.movie-item'); // Get the parent .movie-item element for removal
+                    const messageElement = document.getElementById('watchlist-message');
 
-                try {
-                    const response = await fetch(url, options);
-                    if (response.status === 429) {
-                        console.error("API Rate limit exceeded");
-                        return;
-                    }
+                    // Send AJAX request to remove the movie from the watchlist
+                    fetch('/EnvelopeBaskd/envelope-baskd/watchlist/removeFromWatchlist.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `movie_id=${movieId}`
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            messageElement.textContent = data;
+                            messageElement.style.color = '#333'; // Reset message color
 
-                    if (!response.ok) {
-                        console.error(`Error fetching movies: ${response.statusText}`);
-                        return;
-                    }
+                            // If the movie is successfully removed, remove it from the DOM
+                            if (data === 'Movie removed from watchlist.') {
+                                movieItem.remove(); // Remove the movie from the watchlist UI
+                            }
 
-                    const result = await response.json();
-                    if (result?.data?.mainSearch?.edges) {
-                        const movie = result.data.mainSearch.edges[0].node.entity;
-                        if (movie) {
-                            movies.push({
-                                title: movie.titleText?.text || 'Unknown Title',
-                                imageUrl: movie.primaryImage?.url || 'placeholder.png',
-                                id: movie.id
-                            });
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error fetching movies:", error);
-                }
-            }
+                            // Clear message after a short delay
+                            setTimeout(() => {
+                                messageElement.textContent = '';
+                            }, 1000);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            messageElement.textContent = "Failed to remove movie from watchlist.";
+                            messageElement.style.color = '#333';
 
-            return movies;
-        }
+                            // Clear message after a short delay
+                            setTimeout(() => {
+                                messageElement.textContent = '';
+                            }, 1000);
+                        });
+                });
+            });
+        </script>
 
-        // Display movies in the container
-        async function displayMovies() {
-            const movieContainer = document.getElementById('movie-container');
-            const movies = await fetchMovies();
+    </main>
 
-            if (movies.length === 0) {
-                movieContainer.innerHTML = "<p>No movies in your watchlist.</p>";
-                return;
-            }
-
-            movieContainer.innerHTML = ''; // Clear previous content
-
-            for (const movie of movies) {
-                const movieItem = document.createElement('div');
-                movieItem.classList.add('movie-item');
-                movieItem.innerHTML = `
-                    <a href="pages/specificMovie.php?title=${encodeURIComponent(movie.title)}" class="movie-link">
-                        <img src="${movie.imageUrl}" alt="${movie.title}" class="movie-poster">
-                        <p class="movie-title">${movie.title}</p>
-                    </a>
-                    <button class="remove-from-watchlist" data-movie-id="${movie.id}">Remove from Watchlist</button>
-                `;
-
-                movieContainer.appendChild(movieItem);
-            }
-        }
-
-        // Initialize movie display
-        document.addEventListener('DOMContentLoaded', displayMovies);
-    </script>
-</main>
+</body>
 
 <footer>
     <p style="text-align: center;" class="footer">EnvelopeBaskd</p>
 </footer>
 
-</body>
 </html>
