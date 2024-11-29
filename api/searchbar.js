@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.menu');
     const searchContainer = document.querySelector('.search-container');
 
-    // Toggle search input visibility
+    // Toggles search input visibility
     searchIcon.addEventListener('click', () => {
         if (searchContainer.classList.contains('search-active')) {
-            // Collapse the search bar
+            // Collapse
             searchContainer.classList.remove('search-active');
             menu.classList.remove('search-active');
         } else {
-            // Expand the search bar
+            // Expand
             searchContainer.classList.add('search-active');
             menu.classList.add('search-active');
         }

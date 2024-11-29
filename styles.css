@@ -399,7 +399,10 @@ main {
 }
 
 
+
+
 /* ---------------------------------- */
+/* Review List Container */
 /* Review List Container */
 #review-list {
     display: flex;
@@ -413,29 +416,42 @@ main {
 /* Individual Review Item */
 .review-item {
     display: flex;
-    align-items: flex-start;
+    flex-direction: row; /* Poster and content side-by-side */
     background-color: #fff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px; /* Limit the max width for larger reviews */
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
     width: 100%;
-    margin: 10px;
-    font-family: 'Press Start 2P', monospace;
-    gap: 15px; /* Space between poster and content */
+    max-width: 600px;
+    position: relative; /* So we can position the button at the bottom */
 }
 
 /* Movie Poster */
+.review-poster {
+    width: 120px; /* Adjust poster size */
+    margin-right: 20px; /* Space between poster and content */
+    flex-shrink: 0; /* Prevent shrinking */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the poster */
+}
+
+/* Movie Poster Image */
 .review-poster img {
-    width: 50px; /* Smaller width for the poster */
+    width: 100%;
     height: auto;
     border-radius: 8px;
-    object-fit: cover; /* Ensure the image is cropped to fit */
+    object-fit: cover; /* Ensure image fits nicely */
 }
 
 /* Movie Content (Title + Review Form) */
 .review-content {
-    flex: 1; /* This makes the content take up the remaining space */
+    flex: 1; /* Content takes remaining space */
+    display: flex;
+    flex-direction: column; /* Stack title, review, and rating vertically */
+    text-align: left;
 }
 
 /* Movie Title */
@@ -446,14 +462,13 @@ main {
     text-align: left;
 }
 
-.review-content select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: 'Press Start 2P', monospace;
+/* Review Label Styling */
+.review-content label {
     font-size: 1em;
+    color: #333;
+    font-family: 'Press Start 2P', monospace;
+    margin-bottom: 5px; /* Space between label and textarea */
+    display: block; /* Makes label block level */
 }
 
 /* Review Textarea */
@@ -467,10 +482,37 @@ main {
     font-family: 'Press Start 2P', monospace;
     font-size: 1em;
     resize: vertical;
+    background-color: #f7f7f7; /* Light background for textarea */
 }
 
-/* Adjust the styling on hover for select dropdown */
-.review-content select:hover,
+/* Rating Section: Label and dropdown stacked vertically */
+.rating-section {
+    display: flex;
+    flex-direction: column; /* Stack label and dropdown */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Rating Label Styling */
+.rating-section label {
+    font-size: 1em;
+    color: #333;
+    font-family: 'Press Start 2P', monospace;
+    margin: 0;
+}
+
+/* Rating Dropdown Styling */
+.rating-section select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+/* Hover effect for select and textarea */
+.rating-section select:hover,
 .review-content textarea:hover {
     border-color: #6a1b9a;
 }
@@ -485,6 +527,9 @@ main {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: absolute; /* Button at bottom-right */
+    bottom: 20px;
+    right: 20px;
 }
 
 .review-content button:hover {
@@ -497,61 +542,21 @@ main {
     color: #555;
 }
 
-/* Rating Section: Align label and dropdown side by side */
-.rating-section {
-    display: flex;
-    align-items: center;  /* Vertically align label and dropdown */
-    gap: 10px;            /* Add space between label and dropdown */
-}
-
-/* Rating Label Styling */
-.rating-section label {
-    font-size: 1em;
-    color: #333;
-    font-family: 'Press Start 2P', monospace;
-    margin: 0;
-}
-
-/* Rating Dropdown Styling */
-.rating-section select {
-    width: auto;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: 'Press Start 2P', monospace;
-}
-
-/* Adjust the styling on hover for select dropdown */
-.rating-section select:hover {
-    border-color: #6a1b9a;
-}
-
-/* Review Textarea Styling */
-.review-content textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 1em;
-    resize: vertical;
-}
-
-
-
-
-/* Responsive Styling */
+/* Responsive Layout for Mobile */
 @media (max-width: 768px) {
     .review-item {
-        flex-direction: column;
+        flex-direction: column; /* Stack poster and content vertically */
         max-width: 90%;
+        padding: 15px;
+    }
+
+    .review-poster {
+        width: 100%; /* Full width of the container */
+        margin-bottom: 15px; /* Space between poster and content */
     }
 
     .review-poster img {
-        max-width: 150px;
+        max-width: 150px; /* Adjust image size for mobile */
     }
 
     .review-content h3 {
@@ -561,16 +566,26 @@ main {
     .review-content textarea {
         height: 80px;
     }
+
+    .review-content button {
+        position: static; /* Reset button position */
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
     .review-item {
-        flex-direction: column;
+        flex-direction: column; /* Stack poster and content on very small screens */
         max-width: 100%;
     }
 
+    .review-poster {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
     .review-poster img {
-        max-width: 120px;
+        max-width: 120px; /* Further reduce image size */
     }
 
     .review-content h3 {
@@ -585,4 +600,3 @@ main {
         width: 100%;
     }
 }
-
