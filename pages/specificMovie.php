@@ -14,7 +14,7 @@ if (isset($_GET['title'])) {
     $searchUrl = "https://online-movie-database.p.rapidapi.com/v2/search?searchTerm=$movieTitle";
     $options = [
         "http" => [
-            "header" => "x-rapidapi-key: a04bf9fee4msh9eee9a62a7091abp13defdjsn5191c7091294\r\n" .
+            "header" => "x-rapidapi-key: d3c650deedmsh7c3e51e84954f61p1aa812jsn45d37325bbd5\r\n" .
                 "online-movie-database.p.rapidapi.com\r\n"
         ]
     ];
@@ -158,35 +158,35 @@ if (isset($_GET['title'])) {
 
     // Review add logic
     document.getElementById('add-to-review-list').addEventListener('click', function () {
-    const movieId = this.getAttribute('data-movie-id');
-    const movieTitle = this.getAttribute('data-movie-title');
-    const moviePoster = this.getAttribute('data-movie-poster');
-    const messageElement = document.getElementById('review-list-message');
+        const movieId = this.getAttribute('data-movie-id');
+        const movieTitle = this.getAttribute('data-movie-title');
+        const moviePoster = this.getAttribute('data-movie-poster');
+        const messageElement = document.getElementById('review-list-message');
 
-    console.log("Adding Movie:", movieId, movieTitle); // Debugging line to confirm movie_id is being passed
+        console.log("Adding Movie:", movieId, movieTitle); // Debugging line to confirm movie_id is being passed
 
-    // Send AJAX request using fetch to add the movie to the review list
-    fetch('/EnvelopeBaskd/envelope-baskd/review/addToReview.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `movie_id=${movieId}&movie_title=${encodeURIComponent(movieTitle)}&movie_poster=${encodeURIComponent(moviePoster)}`
-    })
-        .then(response => response.text())
-        .then(data => {
-            messageElement.textContent = data;
-            messageElement.style.color = '#333';
-
-            setTimeout(() => {
-                messageElement.textContent = '';
-            }, 1000);
+        // Send AJAX request using fetch to add the movie to the review list
+        fetch('/EnvelopeBaskd/envelope-baskd/review/addToReview.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `movie_id=${movieId}&movie_title=${encodeURIComponent(movieTitle)}&movie_poster=${encodeURIComponent(moviePoster)}`
         })
-        .catch(error => {
-            console.error('Error:', error);
-            messageElement.textContent = "Failed to add movie to review list.";
-            messageElement.style.color = 'red';
-            setTimeout(() => {
-                messageElement.textContent = '';
-            }, 1000);
-        });
-});
+            .then(response => response.text())
+            .then(data => {
+                messageElement.textContent = data;
+                messageElement.style.color = '#333';
+
+                setTimeout(() => {
+                    messageElement.textContent = '';
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageElement.textContent = "Failed to add movie to review list.";
+                messageElement.style.color = 'red';
+                setTimeout(() => {
+                    messageElement.textContent = '';
+                }, 1000);
+            });
+    });
 </script>

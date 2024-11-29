@@ -56,7 +56,7 @@ $movies = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <p>Your watchlist is empty.</p>
             <?php else: ?>
                 <?php foreach ($movies as $movie): ?>
-                    <div class="movie-item" id="movie-<?php echo htmlspecialchars($movie['movie_id']); ?>">
+                    <div class="movie-item">
                         <a href="/EnvelopeBaskd/envelope-baskd/pages/specificMovie.php?title=<?php echo urlencode($movie['movie_title']); ?>"
                             class="movie-link">
                             <img src="<?php echo htmlspecialchars($movie['movie_poster']); ?>"
@@ -69,6 +69,7 @@ $movies = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+
 
         <script>
             document.querySelectorAll('.remove-from-watchlist').forEach(button => {
@@ -86,36 +87,23 @@ $movies = $statement->fetchAll(PDO::FETCH_ASSOC);
                         .then(response => response.text())
                         .then(data => {
                             messageElement.textContent = data;
-                            messageElement.style.color = '#333'; // Reset message color
+                            messageElement.style.color = '#333';
 
-                            // If the movie is successfully removed, remove it from the DOM
-                            if (data === 'Movie removed from watchlist.') {
-                                movieItem.remove(); // Remove the movie from the watchlist UI
-                            }
-
-                            // Clear message after a short delay
                             setTimeout(() => {
                                 messageElement.textContent = '';
                             }, 1000);
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            messageElement.textContent = "Failed to remove movie from watchlist.";
+                            messageElement.textContent = "Failed to remove movie to watchlist.";
                             messageElement.style.color = '#333';
-
-                            // Clear message after a short delay
-                            setTimeout(() => {
-                                messageElement.textContent = '';
-                            }, 1000);
-                        });
+                            messageElement.textContent = '';
+                        }, 1000);
                 });
             });
         </script>
 
-    </main>
-
 </body>
-
 <footer>
     <p style="text-align: center;" class="footer">EnvelopeBaskd</p>
 </footer>

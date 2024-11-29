@@ -25,17 +25,17 @@ $userId = $user['id'];
 
 // Check if movie data was provided in the request
 if (isset($_POST['movie_id'], $_POST['movie_title'], $_POST['movie_poster'])) {
-    // Ensure movie_id is an integer
-    $movieId = (int) $_POST['movie_id'];
+    // Ensure movie_id is treated as a string (IMDb IDs like "tt0097165" are strings)
+    $movieId = $_POST['movie_id'];  // Movie ID should be a string like "tt0097165"
     $movieTitle = $_POST['movie_title'];
     $moviePoster = $_POST['movie_poster'];
 
     // Insert the movie into the reviews table with empty review text and NULL rating
     $query = "INSERT INTO reviews (user_id, movie_id, movie_title, movie_poster, review_text, rating, review_date) 
-                  VALUES (:user_id, :movie_id, :movie_title, :movie_poster, '', NULL, NOW())"; // NULL for rating
+              VALUES (:user_id, :movie_id, :movie_title, :movie_poster, '', NULL, NOW())"; // NULL for rating
     $stmt = $con->prepare($query);
     $stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);
-    $stmt->bindParam(":movie_id", $movieId, PDO::PARAM_INT);
+    $stmt->bindParam(":movie_id", $movieId, PDO::PARAM_STR);  // Bind movie_id as a string
     $stmt->bindParam(":movie_title", $movieTitle);
     $stmt->bindParam(":movie_poster", $moviePoster);
 

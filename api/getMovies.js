@@ -3,7 +3,7 @@ async function fetchMovies(query) {
     const options = {
         method: 'GET',
         headers: {
-         'x-rapidapi-key': 'a04bf9fee4msh9eee9a62a7091abp13defdjsn5191c7091294',
+         'x-rapidapi-key': 'd3c650deedmsh7c3e51e84954f61p1aa812jsn45d37325bbd5',
 		'x-rapidapi-host': 'online-movie-database.p.rapidapi.com'
         }
     };
@@ -23,27 +23,25 @@ async function fetchMovies(query) {
 
         const result = await response.json();
 
-        // Check if the expected structure is present
         if (result?.data?.mainSearch?.edges) {
-            // Filter movies based on the length of principalCredits
+            // Filters movies based on the length of principalCredits
             const movies = result.data.mainSearch.edges
                 .map(edge => {
                     const entity = edge.node.entity;
 
-                    // Check if the movie has more than 0 principalCredits
+                    // Checks if the movie has more than 0 principalCredits
                     if (entity.principalCredits && entity.principalCredits.length > 0) {
                         return {
                             title: entity.titleText?.text || 'Unknown Title',
                             imageUrl: entity.primaryImage?.url || 'placeholder.png',
                         };
                     }
-                    return null; // If no principalCredits, exclude this movie
+                    return null; // If there is no principalCredits, the movie gets excluded
                 })
-                .filter(movie => movie !== null); // Remove null values (movies without principalCredits)
+                .filter(movie => movie !== null);
 
             return movies;
         } else {
-            // Log the unexpected response structure for debugging
             console.error("Unexpected API response:", JSON.stringify(result, null, 2));
             return [];
         }
@@ -55,7 +53,7 @@ async function fetchMovies(query) {
 
 async function displayMovies(movies) {
     const movieContainer = document.getElementById('movie-list');
-    movieContainer.innerHTML = ''; // Clear previous content
+    movieContainer.innerHTML = ''; // Clears previous content
 
     if (movies.length === 0) {
         movieContainer.innerHTML = "<p>No movies or shows found.</p>";
@@ -66,7 +64,7 @@ async function displayMovies(movies) {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
 
-        // Use the movie title in the URL query string
+        // Uses the movie title in the URL query string
         movieItem.innerHTML = `
             <a href="pages/specificMovie.php?title=${encodeURIComponent(movie.title)}" class="movie-link">
                 <img src="${movie.imageUrl}" alt="${movie.title}" class="movie-poster">
